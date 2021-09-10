@@ -1,0 +1,45 @@
+[
+    {
+        "GroupId": 1,
+        "GroupName": "Flag FootBall",
+        "Organizations": [
+            {
+                "OrganizationId": "Org1",
+                "OrganizationName": "The Lucky Winners",
+                "CoachName": "CheaterMcCheatCheat",
+                "CoachPhoneNumber": "374-2938",
+                "Members": []
+            }
+        ],
+        "SponsorName": "Anthony Lopez-Guerra",
+        "SponsorPhone": "555-5555",
+        "SponsorEmail": "anthony@email.com",
+        "MaxGroupSize": 7
+    },
+    {
+        "GroupId": 2,
+        "GroupName": "Golf",
+        "Organizations": [],
+        "SponsorName": "Daniel Smith",
+        "SponsorPhone": "234-5867",
+        "SponsorEmail": "daniel@email.com",
+        "MaxGroupSize": 7
+    },
+    {
+        "GroupId": 3,
+        "GroupName": "Soccer",
+        "Organizations": [
+            {
+                "OrganizationId": "Org1",
+                "OrganizationName": "The Lucky Winners",
+                "CoachName": "CheaterMcCheatCheat",
+                "CoachPhoneNumber": "374-2938",
+                "Members": []
+            }
+        ],
+        "SponsorName": "Alanis Rodriguez",
+        "SponsorPhone": "345-1234",
+        "SponsorEmail": "alanis@email.com",
+        "MaxGroupSize": 7
+    }
+]

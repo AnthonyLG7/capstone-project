@@ -1,0 +1,22 @@
+[
+    {
+        "OrganizationName": "The Lucky Winners",
+        "OrganizationId": "Org1",
+        "Description": "This is organization 1"
+    },
+    {
+        "OrganizationName": "The Unlucky Losers",
+        "OrganizationId": "Org2",
+        "Description": "This is organization 2"
+    },
+    {
+        "OrganizationName": "3rd Place Champs",
+        "OrganizationId": "Org3",
+        "Description": "This is organization 3"
+    },
+    {
+        "OrganizationName": "At Least We Are Not Last",
+        "OrganizationId": "Org4",
+        "Description": "This is organization 4"
+    }
+]
