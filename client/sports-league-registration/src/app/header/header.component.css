@@ -4,4 +4,5 @@ header {
   border-bottom: 3px solid #000;
   top: 0;
   position: fixed;
+  height: 87px;
 }

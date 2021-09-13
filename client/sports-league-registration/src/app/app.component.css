@@ -30,8 +30,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 50px;
   width: 100%;
-  margin-top: 135px;
-  margin-bottom: 100px;
+}
+app-main {
+  overflow: auto;
+}
+app-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 0;
 }
