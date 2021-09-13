@@ -1,0 +1,7 @@
+<section
+  class="sportsSection"
+  *ngFor="let sport of sports"
+  (click)="sportsDetailsRoute(sport)"
+>
+  <app-sport [sportInput]="sport" [routerLink]="sport.GroupId"></app-sport>
+</section>

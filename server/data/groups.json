@@ -8,6 +8,27 @@
                 "OrganizationName": "The Lucky Winners",
                 "CoachName": "CheaterMcCheatCheat",
                 "CoachPhoneNumber": "374-2938",
+                "Members": [
+                    {
+                        "MemberId": 1,
+                        "MemberEmail": "Player1@email.com",
+                        "MemberName": "Player One",
+                        "MemberPhone": "555-6234"
+                    }
+                ]
+            },
+            {
+                "OrganizationId": "Org2",
+                "OrganizationName": "The UnLucky Losers",
+                "CoachName": "LosersMcLoseLose",
+                "CoachPhoneNumber": "374-2940",
+                "Members": []
+            },
+            {
+                "OrganizationId": "Org3",
+                "OrganizationName": "The Middle Guys",
+                "CoachName": "WeDontWinButWeArentLast",
+                "CoachPhoneNumber": "374-7829",
                 "Members": []
             }
         ],

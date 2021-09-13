@@ -1,0 +1,9 @@
+.landingContainer {
+  border: 1px solid #000;
+  border-radius: 1em;
+  background-color: #224870;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}

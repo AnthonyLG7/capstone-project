@@ -1,0 +1,7 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid #000;
+  position: relative;
+  top: 0;
+}

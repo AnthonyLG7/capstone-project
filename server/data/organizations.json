@@ -2,21 +2,29 @@
     {
         "OrganizationName": "The Lucky Winners",
         "OrganizationId": "Org1",
-        "Description": "This is organization 1"
+        "CoachName": "CheaterMcCheatCheat",
+        "CoachPhoneNumber": "374-2938",
+        "Members": []
     },
     {
         "OrganizationName": "The Unlucky Losers",
         "OrganizationId": "Org2",
-        "Description": "This is organization 2"
+        "CoachName": "Daniel Smith",
+        "CoachPhoneNumber": "555-5553",
+        "Members": []
     },
     {
         "OrganizationName": "3rd Place Champs",
         "OrganizationId": "Org3",
-        "Description": "This is organization 3"
+        "CoachName": "LoserMcLoseLose",
+        "CoachPhoneNumber": "837-2941",
+        "Members": []
     },
     {
         "OrganizationName": "At Least We Are Not Last",
         "OrganizationId": "Org4",
-        "Description": "This is organization 4"
+        "CoachName": "Zack Carpenter",
+        "CoachPhoneNumber": "923-5964",
+        "Members": []
     }
 ]

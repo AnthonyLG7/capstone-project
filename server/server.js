@@ -180,7 +180,7 @@ app.get('/api/groups/:id', function (req, res) {
 
     console.log('Returned data is: ')
     console.log(match)
-    res.end(JSON.stringify(match)).contentType('application/json')
+    res.end(JSON.stringify(match))
 })
 
 // GET MANY GROUPS BY ORGANIZATION
@@ -552,7 +552,7 @@ app.post(
                     match.Organizations[key].Members.length
                 ) {
                     res.status(409).send(
-                        'Group is already full. Cannot add new members'
+                        'Members is already full. Cannot add new members'
                     )
                     return
                 }
@@ -561,12 +561,12 @@ app.post(
         }
 
         // add the member
-        if (Number(match.MaxGroupSize) === match.Members.length) {
-            res.status(409).send(
-                'Group is already full. Cannot add new members'
-            )
-            return
-        }
+        // if (Number(match.MaxGroupSize) === match.Members.length) {
+        //     res.status(409).send(
+        //         'Group is already full. Cannot add new members'
+        //     )
+        //     return
+        // }
 
         fs.writeFileSync(__dirname + '/data/groups.json', JSON.stringify(data))
 

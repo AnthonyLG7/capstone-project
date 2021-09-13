@@ -1,0 +1,44 @@
+.sportDetails {
+  border: 1px solid #000;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 720px;
+  border-radius: 1em;
+}
+.teamDetails {
+  border: 1px solid #000;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 720px;
+  border-radius: 1em;
+}
+label {
+  align-self: flex-start;
+}
+.labelHeading {
+  align-self: flex-start;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.labelContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  border-bottom: 1px black solid;
+}
+.btnContainer {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-bottom: 1px black solid;
+}

@@ -1,0 +1,40 @@
+<main>
+  <section class="sportDetails">
+    <h1>Sport: {{ currentSport.GroupName }}</h1>
+    <div class="wrapper">
+      <div class="labelContainer">
+        <label>Sport ID: {{ currentSport.GroupId }}</label>
+        <label>Sport Director's Name: {{ currentSport.SponsorName }}</label>
+        <label>Sport Director's Email: {{ currentSport.SponsorEmail }}</label>
+        <label>Sport Director's Phone: {{ currentSport.SponsorPhone }}</label>
+        <label
+          >Team Capacity: {{ currentSport.Organizations.length }}/
+          {{ currentSport.MaxGroupSize }}</label
+        >
+      </div>
+      <div class="btnContainer">
+        <app-edit-btn></app-edit-btn>
+        <app-delete-btn></app-delete-btn>
+      </div>
+    </div>
+  </section>
+  <section class="teamDetails">
+    <div class="wrapper" *ngFor="let team of currentSport.Organizations">
+      <div class="labelContainer">
+        <h1 class="labelHeading">Teams: {{ team.OrganizationName }}</h1>
+        <label>Team ID: {{ team.OrganizationId }}</label>
+        <label>Coach's Name: {{ team.CoachName }}</label>
+        <label>Coach's Phone: {{ team.CoachPhoneNumber }}</label>
+        <label
+          >Player Capacity: {{ team.Members.length }}/
+          {{ currentSport.MaxGroupSize }}</label
+        >
+      </div>
+      <div class="btnContainer">
+        <app-view-btn></app-view-btn>
+        <app-edit-btn></app-edit-btn>
+        <app-delete-btn></app-delete-btn>
+      </div>
+    </div>
+  </section>
+</main>

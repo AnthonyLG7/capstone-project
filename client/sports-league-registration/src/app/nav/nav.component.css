@@ -1,0 +1,21 @@
+ul {
+  list-style-type: none;
+  background-color: #8ac6d0;
+  height: 2.25em;
+  margin-top: 0;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+li > a {
+  color: #ee6c4d;
+  text-decoration: none;
+  display: inline;
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding-right: 1.45em;
+  padding-left: 0.45em;
+  cursor: pointer;
+}
