@@ -149,7 +149,30 @@ app.get('/api/organizations', function (req, res) {
 
     console.log('Returned data is: ')
     console.log(data)
-    res.end(JSON.stringify(data)).contentType('application/json')
+    res.end(JSON.stringify(data))
+})
+
+// GET ALL COACHES
+app.get('/api/coaches', function (req, res) {
+    console.log('Received a GET request for all coaches')
+
+    let data = fs.readFileSync(__dirname + '/data/coaches.json', 'utf8')
+    data = JSON.parse(data)
+
+    console.log('Returned data is: ')
+    console.log(data)
+    res.end(JSON.stringify(data))
+})
+//GET ALL PLAYERS
+app.get('/api/players', function (req, res) {
+    console.log('Received a GET request for all players')
+
+    let data = fs.readFileSync(__dirname + '/data/members.json', 'utf8')
+    data = JSON.parse(data)
+
+    console.log('Returned data is: ')
+    console.log(data)
+    res.end(JSON.stringify(data))
 })
 
 // GET ALL GROUPS
@@ -174,6 +197,25 @@ app.get('/api/organizations/:id', function (req, res) {
     let match = data.find((element) => element.OrganizationId == id)
     if (match == null) {
         res.status(404).send('Group Not Found')
+        return
+    }
+
+    console.log('Returned data is: ')
+    console.log(match)
+    res.end(JSON.stringify(match))
+})
+
+// GET COACHES BY TEAM
+app.get('/api/coaches/:id', function (req, res) {
+    let id = req.params.id
+    console.log('Received a GET request for coaches with organization ' + id)
+
+    let data = fs.readFileSync(__dirname + '/data/coaches.json', 'utf8')
+    data = JSON.parse(data)
+
+    let match = data.Coaches.find((element) => element.OrganizationName == id)
+    if (match == null) {
+        res.status(404).send('Coach Not Found')
         return
     }
 

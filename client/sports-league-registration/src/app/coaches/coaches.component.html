@@ -1,0 +1,16 @@
+<main>
+  <section class="coachesDetails">
+    <h1>Coaches</h1>
+    <div class="wrapper" *ngFor="let coach of coaches">
+      <div class="labelContainer">
+        <label>Team: {{ coach.OrganizationName }}</label>
+        <label>Coach's Name: {{ coach.CoachName }}</label>
+        <label>Coach's Phone: {{ coach.CoachPhoneNumber }}</label>
+      </div>
+      <div class="btnContainer">
+        <app-edit-btn></app-edit-btn>
+        <app-delete-btn></app-delete-btn>
+      </div>
+    </div>
+  </section>
+</main>

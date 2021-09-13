@@ -7,6 +7,8 @@ import { BaseLandingPageComponent } from './base-landing-page/base-landing-page.
 import { SportsDetailsComponent } from './sports-details/sports-details.component';
 import { TeamsComponent } from './teams/teams.component';
 import { TeamDetailsComponent } from './team-details/team-details.component';
+import { CoachesComponent } from './coaches/coaches.component';
+import { PlayersComponent } from './players/players.component';
 
 
 const routes: Routes = [
@@ -33,6 +35,13 @@ const routes: Routes = [
       {
         path: 'teams/:id', component: TeamDetailsComponent
       },
+      {
+        path: 'coaches', component: CoachesComponent
+      },
+      {
+        path: 'players', component: PlayersComponent
+      }
+
       
     ]
   }

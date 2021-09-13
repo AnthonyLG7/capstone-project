@@ -29,18 +29,28 @@ label {
 .wrapper {
   display: flex;
   flex-direction: row;
+  border-top: 1px black solid;
 }
 .labelContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 25px;
   width: 50%;
-  border-bottom: 1px black solid;
 }
 .btnContainer {
-  align-self: flex-end;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 25px;
   width: 50%;
-  border-bottom: 1px black solid;
+}
+
+app-edit-btn,
+app-delete-btn,
+app-view-btn {
+  width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

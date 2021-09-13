@@ -3,4 +3,5 @@ footer {
   bottom: 0;
   border-top: 3px solid #000;
   text-align: left;
+  position: fixed;
 }

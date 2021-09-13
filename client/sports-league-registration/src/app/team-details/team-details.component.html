@@ -2,11 +2,11 @@
   <h1>{{ teamName }}</h1>
   <div class="wrapper" *ngFor="let sport of sportList">
     <div class="labelContainer">
-      <h1 class="labelHeading">Sports: {{ sport.GroupName }}</h1>
-      <label>Sport ID: {{ sport.GroupId }}</label>
-      <label>Sport Director's Name: {{ sport.SponsorName }}</label>
-      <label>Sport Director's Email: {{ sport.SponsorEmail }}</label>
-      <label>Sport Director's Phone: {{ sport.SponsorPhone }}</label>
+      <h1 class="labelHeading">Sports: {{ sport?.GroupName }}</h1>
+      <label>Sport ID: {{ sport?.GroupId }}</label>
+      <label>Sport Director's Name: {{ sport?.SponsorName }}</label>
+      <label>Sport Director's Email: {{ sport?.SponsorEmail }}</label>
+      <label>Sport Director's Phone: {{ sport?.SponsorPhone }}</label>
     </div>
     <div class="btnContainer">
       <app-view-btn></app-view-btn>

@@ -21,6 +21,7 @@ import { DeleteBtnComponent } from './delete-btn/delete-btn.component';
 import { ViewBtnComponent } from './view-btn/view-btn.component';
 import { TeamComponent } from './team/team.component';
 import { TeamDetailsComponent } from './team-details/team-details.component';
+import { CoachesComponent } from './coaches/coaches.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TeamDetailsComponent } from './team-details/team-details.component';
     DeleteBtnComponent,
     ViewBtnComponent,
     TeamComponent,
-    TeamDetailsComponent
+    TeamDetailsComponent,
+    CoachesComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ body {
   height: 100%;
   margin-left: auto;
   margin-right: auto;
-  position: fixed;
+  position: absolute;
   /* background: url(assets/seamless-sports-pattern-background-vector-1963029.jpg); */
   background-image: url(assets/sport.svg);
   background-color: #122c34;
@@ -19,8 +19,9 @@ body {
   box-shadow: inset 0 0 95px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  /* align-items: stretch; */
   justify-content: center;
+  overflow: auto;
 }
 .mcontainer {
   display: flex;
@@ -37,6 +38,7 @@ body {
   width: 150px;
   padding: 5px;
   margin: 1em;
+  margin-bottom: 0;
   clear: both;
   border: solid #2a4494 2px;
   border-radius: 10px;
@@ -57,7 +59,6 @@ body {
   width: 150px;
   padding: 5px;
   margin-top: 0;
-  margin-bottom: 1em;
   clear: both;
   border: solid #2a4494 2px;
   border-radius: 10px;
@@ -66,6 +67,28 @@ body {
   background: linear-gradient(to top, #f7f06d, #edd83d);
   box-shadow: rgba(0, 0, 0, 0.5) 4px 4px 24px;
   cursor: pointer;
+  justify-items: center;
+}
+
+.viewButton {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: -1px -1px 1px #ccc;
+  height: 40px;
+  width: 150px;
+  padding: 5px;
+  margin-top: 0;
+  clear: both;
+  border: solid #2a4494 2px;
+  border-radius: 10px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#44cfcb), to(#4ea5d9));
+  background: -moz-linear-gradient(top, #44cfcb, #4ea5d9);
+  background: linear-gradient(to top, #44cfcb, #4ea5d9);
+  box-shadow: rgba(0, 0, 0, 0.5) 4px 4px 24px;
+  cursor: pointer;
+  justify-items: center;
 }
 
 .deleteButton {
@@ -77,7 +100,6 @@ body {
   height: 40px;
   width: 150px;
   padding: 5px;
-  margin-bottom: 1em;
   margin-top: 0;
   clear: both;
   border: solid #2a4494 2px;

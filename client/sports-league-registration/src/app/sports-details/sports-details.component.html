@@ -19,7 +19,10 @@
     </div>
   </section>
   <section class="teamDetails">
-    <div class="wrapper" *ngFor="let team of currentSport.Organizations">
+    <div
+      [ngClass]="first ? 'firstWrapper' : 'wrapper'"
+      *ngFor="let team of currentSport.Organizations; let first = first"
+    >
       <div class="labelContainer">
         <h1 class="labelHeading">Teams: {{ team.OrganizationName }}</h1>
         <label>Team ID: {{ team.OrganizationId }}</label>

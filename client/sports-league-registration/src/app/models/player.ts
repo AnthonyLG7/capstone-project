@@ -1,6 +1,6 @@
 export class Player {
     MemberId: number;
     MemberEmail: string;
-    MemberrName: string;
+    MemberName: string;
     MemberPhone: string;
 }

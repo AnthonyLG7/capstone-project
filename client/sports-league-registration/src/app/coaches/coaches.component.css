@@ -1,4 +1,4 @@
-.sportDetails {
+.coachesDetails {
   border: 1px solid #000;
   background-color: #224870;
   display: flex;
@@ -9,6 +9,7 @@
   border-radius: 1em;
   color: peachpuff;
 }
+
 .teamDetails {
   border: 1px solid #000;
   background-color: #224870;
@@ -29,17 +30,13 @@ label {
 .wrapper {
   display: flex;
   flex-direction: row;
-  border-top: 1px black solid;
-}
-.firstWrapper {
-  display: flex;
-  flex-direction: row;
 }
 .labelContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
+  border-top: 1px black solid;
   padding-left: 25px;
 }
 .btnContainer {
@@ -49,10 +46,11 @@ label {
   align-items: flex-end;
   padding-right: 25px;
   width: 50%;
+  border-top: 1px black solid;
 }
+
 app-edit-btn,
-app-delete-btn,
-app-view-btn {
+app-delete-btn {
   width: 150px;
   padding-top: 10px;
   padding-bottom: 10px;

@@ -1,1 +1,17 @@
-<p>players works!</p>
+<main>
+  <section class="playerDetails">
+    <h1>Players</h1>
+    <div class="wrapper" *ngFor="let player of players">
+      <div class="labelContainer">
+        <label>Player Name: {{ player.MemberName }}</label>
+        <label>Player ID: {{ player.MemberId }}</label>
+        <label>Player's Phone: {{ player.MemberPhone }}</label>
+        <label>Player's Email: {{ player.MemberEmail }}</label>
+      </div>
+      <div class="btnContainer">
+        <app-edit-btn></app-edit-btn>
+        <app-delete-btn></app-delete-btn>
+      </div>
+    </div>
+  </section>
+</main>
