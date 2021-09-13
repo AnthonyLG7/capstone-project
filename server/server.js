@@ -161,7 +161,25 @@ app.get('/api/groups', function (req, res) {
 
     console.log('Returned data is: ')
     console.log(data)
-    res.end(JSON.stringify(data)).contentType('application/json')
+    res.end(JSON.stringify(data))
+})
+// GET ONE ORGANIZATION BY ID
+app.get('/api/organizations/:id', function (req, res) {
+    let id = req.params.id
+    console.log('Received a GET request for organization ' + id)
+
+    let data = fs.readFileSync(__dirname + '/data/organizations.json', 'utf8')
+    data = JSON.parse(data)
+
+    let match = data.find((element) => element.OrganizationId == id)
+    if (match == null) {
+        res.status(404).send('Group Not Found')
+        return
+    }
+
+    console.log('Returned data is: ')
+    console.log(match)
+    res.end(JSON.stringify(match))
 })
 
 // GET ONE GROUP BY ID
@@ -219,6 +237,7 @@ app.get('/api/groups/byorganization/:id', function (req, res) {
                 organization.OrganizationId
             ) {
                 matchingGroups.push(data[key])
+                console.log('logging data: ' + data[key].Organizations[key2])
             }
         }
     }

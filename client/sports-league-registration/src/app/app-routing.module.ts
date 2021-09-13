@@ -5,6 +5,8 @@ import { LandPageBtnComponent } from './land-page-btn/land-page-btn.component';
 import { SportsComponent } from './sports/sports.component';
 import { BaseLandingPageComponent } from './base-landing-page/base-landing-page.component';
 import { SportsDetailsComponent } from './sports-details/sports-details.component';
+import { TeamsComponent } from './teams/teams.component';
+import { TeamDetailsComponent } from './team-details/team-details.component';
 
 
 const routes: Routes = [
@@ -20,7 +22,18 @@ const routes: Routes = [
       },
       {
         path: 'sports/:id', component: SportsDetailsComponent
-      }
+      },
+      {
+        path: 'teams', component: TeamsComponent,
+        children: [
+          {path: 'teams', component: SportsComponent},
+          {path: 'teams/:id', component: SportsDetailsComponent}
+        ]
+      },
+      {
+        path: 'teams/:id', component: TeamDetailsComponent
+      },
+      
     ]
   }
 ]

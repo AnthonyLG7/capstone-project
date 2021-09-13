@@ -19,6 +19,8 @@ import { RouterModule } from '@angular/router';
 import { EditBtnComponent } from './edit-btn/edit-btn.component';
 import { DeleteBtnComponent } from './delete-btn/delete-btn.component';
 import { ViewBtnComponent } from './view-btn/view-btn.component';
+import { TeamComponent } from './team/team.component';
+import { TeamDetailsComponent } from './team-details/team-details.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ViewBtnComponent } from './view-btn/view-btn.component';
     SportsDetailsComponent,
     EditBtnComponent,
     DeleteBtnComponent,
-    ViewBtnComponent
+    ViewBtnComponent,
+    TeamComponent,
+    TeamDetailsComponent
   ],
   imports: [
     BrowserModule,

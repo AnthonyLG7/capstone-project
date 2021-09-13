@@ -1,0 +1,10 @@
+{
+    "Members": [
+        {
+            "MemberId": 1,
+            "MemberEmail": "player1@email.com",
+            "MemberName": "Player One",
+            "MemberPhone": "234-5967"
+        }
+    ]
+}

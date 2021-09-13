@@ -1,9 +1,9 @@
 import { Player } from "./player";
 
 export class Team {
-    teamName: string;
-    teamId: string;
-    coachName: string;
-    coachPhone: string;
-    players: Array<Player>;
+    OrganizationName: string;
+    OrganizationId: string;
+    CoachName: string;
+    CoachPhoneNumber: string;
+    Members: Array<Player>;
 }
