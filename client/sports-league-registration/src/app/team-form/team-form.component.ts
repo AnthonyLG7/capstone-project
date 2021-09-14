@@ -35,7 +35,8 @@ export class TeamFormComponent implements OnInit {
       'OrganizationName': [this.currentTeam?.OrganizationName, [Validators.required]],
       'CoachName': [this.currentTeam?.CoachName, [Validators.required]],
       'CoachPhoneNumber': [this.currentTeam?.CoachPhoneNumber, [Validators.required]],
-    })
+    });
+    console.log(this.currentTeam.CoachName);
   }
 
   cancelTeamForm() {

@@ -132,3 +132,8 @@ app-nav {
 app-sport-form {
   width: 500px;
 }
+
+.viewButton:active,
+.viewButton:hover {
+  transform: scale(1.03);
+}

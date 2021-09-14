@@ -54,6 +54,6 @@ app-edit-btn,
 app-delete-btn,
 app-view-btn {
   width: 150px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

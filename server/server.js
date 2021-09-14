@@ -369,6 +369,65 @@ app.get(
     }
 )
 
+// GET ALL ORgs IN A SPECIFIC GROUP
+app.get('/api/groups/:groupid/organizations', function (req, res) {
+    let groupId = req.params.groupid
+    console.log(
+        'Received a GET request for  all organizations ' +
+            ' in group ' +
+            groupId
+    )
+
+    let data = fs.readFileSync(__dirname + '/data/groups.json', 'utf8')
+    data = JSON.parse(data)
+
+    // find the group
+    let matchingGroup = data.find((element) => element.GroupId == groupId)
+    if (matchingGroup == null) {
+        res.status(404).send('Group Not Found')
+        return
+    }
+
+    console.log('Returned data is: ')
+    console.log(matchingGroup.Organizations)
+    res.end(JSON.stringify(matchingGroup.Organizations))
+})
+
+// GET ALL MEMBERs IN A SPECIFIC GROUP
+app.get(
+    '/api/groups/:groupid/organizations/:orgid/members',
+    function (req, res) {
+        let groupId = req.params.groupid
+        let orgId = req.params.orgid
+        console.log(
+            'Received a GET request for  all members ' + ' in group ' + groupId
+        )
+
+        let data = fs.readFileSync(__dirname + '/data/groups.json', 'utf8')
+        data = JSON.parse(data)
+
+        // find the group
+        let matchingGroup = data.find((element) => element.GroupId == groupId)
+        if (matchingGroup == null) {
+            res.status(404).send('Group Not Found')
+            return
+        }
+
+        // find the organization
+        let matchingOrg = matchingGroup.Organizations.find(
+            (element) => element.OrganizationId == orgId
+        )
+        if (matchingOrg == null) {
+            res.status(404).send('Organization Not Found')
+            return
+        }
+
+        console.log('Returned data is: ')
+        console.log(matchingOrg.Members)
+        res.end(JSON.stringify(matchingOrg.Members))
+    }
+)
+
 // ADD A GROUP
 app.post('/api/groups', urlencodedParser, function (req, res) {
     console.log('Received a POST request to add a group')

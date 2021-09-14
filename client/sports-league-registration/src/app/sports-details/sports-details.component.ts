@@ -19,7 +19,6 @@ export class SportsDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((value) => this.sportId = value.id);
-    console.log('testing before function ' + this.sportId)
     this.sportsService.getSportById(this.sportId).subscribe((sport) => this.currentSport = sport);
     console.log(this.currentSport);
   }
@@ -30,6 +29,11 @@ export class SportsDetailsComponent implements OnInit {
 
   showTeamSportEditForm(currentTeam: Team) {
     this.router.navigateByUrl(`${this.router.url}/editTeam/${currentTeam.OrganizationId}`);
+    console.log("I am accidentally pressed")
+  }
+  showPlayers(currentTeam: Team) {
+    console.log('I am pressed');
+    this.router.navigateByUrl(`${this.router.url}/viewPlayers/${currentTeam.OrganizationId}`)
   }
 
 }

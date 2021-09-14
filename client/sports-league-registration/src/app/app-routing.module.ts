@@ -23,6 +23,7 @@ const routes: Routes = [
           { path: 'sports', component: SportsComponent},
           { path: 'sports/:id', component: SportsDetailsComponent,
             children: [
+              { path: 'sports/:id/viewPlayers/:teamId', component: PlayersComponent},
              { path: 'sports/:id/editSport', component: SportFormComponent},
              { path: 'sports/:id/editTeam/:teamId', component: TeamFormComponent},
              
@@ -50,8 +51,8 @@ const routes: Routes = [
         path: 'players', component: PlayersComponent
       },
       { path: 'sports/:id/:sportFormStatus', component: SportFormComponent},
-      { path: 'sports/:id/:teamFormStatus/:teamId', component: TeamFormComponent}
-      
+      { path: 'sports/:id/:teamFormStatus/:teamId', component: TeamFormComponent},
+      { path: 'sports/:id/viewPlayers/:teamId', component: PlayersComponent}
       
     ]
   }
