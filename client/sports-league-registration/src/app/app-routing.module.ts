@@ -9,6 +9,7 @@ import { TeamsComponent } from './teams/teams.component';
 import { TeamDetailsComponent } from './team-details/team-details.component';
 import { CoachesComponent } from './coaches/coaches.component';
 import { PlayersComponent } from './players/players.component';
+import { SportFormComponent } from './sport-form/sport-form.component';
 
 
 const routes: Routes = [
@@ -18,8 +19,12 @@ const routes: Routes = [
       { path: '', component: BaseLandingPageComponent },
       { path: 'sports', component: SportsComponent,
         children: [
-          {path: 'sports', component: SportsComponent},
-          {path: 'sports/:id', component: SportsDetailsComponent}
+          { path: 'sports', component: SportsComponent},
+          { path: 'sports/:id', component: SportsDetailsComponent,
+            children: [
+             { path: 'sports/:id/editSport', component: SportFormComponent}
+           ]
+          }
         ]
       },
       {
@@ -40,7 +45,8 @@ const routes: Routes = [
       },
       {
         path: 'players', component: PlayersComponent
-      }
+      },
+      { path: 'sports/:id/:sportFormStatus', component: SportFormComponent}
 
       
     ]

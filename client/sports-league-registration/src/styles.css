@@ -37,7 +37,7 @@ div.mainContainer {
   font-weight: bold;
   text-decoration: none;
   text-shadow: -1px -1px 1px #ccc;
-  height: 40px;
+  height: 40px !important;
   width: 150px;
   padding: 5px;
   margin: 1em;
@@ -95,21 +95,27 @@ div.mainContainer {
 }
 
 .deleteButton {
-  color: #333;
+  color: peachpuff;
   font-size: 16px;
   font-weight: bold;
   text-decoration: none;
-  text-shadow: -1px -1px 1px #ccc;
-  height: 40px;
+  text-shadow: -1px -1px 1px #000;
+  height: 40px !important;
   width: 150px;
   padding: 5px;
   margin-top: 0;
   clear: both;
   border: solid #2a4494 2px;
   border-radius: 10px;
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#ea0f0b), to(#d60e0a));
-  background: -moz-linear-gradient(top, #ea0f0b, #d60e0a);
-  background: linear-gradient(to top, #ea0f0b, #d60e0a);
+  background: -webkit-gradient(
+    linear,
+    0 0,
+    0 100%,
+    from(#ea0f0b),
+    to(#d60e0a)
+  ) !important;
+  background: -moz-linear-gradient(top, #ea0f0b, #d60e0a) !important;
+  background: linear-gradient(to top, #ea0f0b, #d60e0a) !important;
   box-shadow: rgba(0, 0, 0, 0.5) 4px 4px 24px;
   cursor: pointer;
 }
@@ -122,4 +128,7 @@ div.mainContainer {
 }
 app-nav {
   margin-top: 90px;
+}
+app-sport-form {
+  width: 500px;
 }

@@ -29,7 +29,12 @@ export class SportsService {
   }
   getSportById(sportId: number): Observable<Sport>{
     const result: Observable<Sport> = this.http.get<Sport>(`${this.sportsUrl}/${sportId}`);
-    console.log(result);
+    //console.log(result);
+    return result;
+  }
+  updateSport(sport: Sport): Observable<Sport> {
+    const result: Observable<Sport> = this.http.put<Sport>(this.sportsUrl, sport, this.jsonContentTypeHeaders);
+    console.log("Update sport");
     return result;
   }
 }

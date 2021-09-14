@@ -15,13 +15,15 @@ import { SportComponent } from './sport/sport.component';
 import { NavComponent } from './nav/nav.component';
 import { SportsDetailsComponent } from './sports-details/sports-details.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterModule } from '@angular/router';
 import { EditBtnComponent } from './edit-btn/edit-btn.component';
 import { DeleteBtnComponent } from './delete-btn/delete-btn.component';
 import { ViewBtnComponent } from './view-btn/view-btn.component';
 import { TeamComponent } from './team/team.component';
 import { TeamDetailsComponent } from './team-details/team-details.component';
 import { CoachesComponent } from './coaches/coaches.component';
+import { SportFormComponent } from './sport-form/sport-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,13 +44,16 @@ import { CoachesComponent } from './coaches/coaches.component';
     ViewBtnComponent,
     TeamComponent,
     TeamDetailsComponent,
-    CoachesComponent
+    CoachesComponent,
+    SportFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
 
   ],
   providers: [],
