@@ -1,11 +1,17 @@
 <section class="sportContainer">
-  <div class="sportData">
-    <p>{{ this.sportInput.GroupName }}</p>
-    <p>Sport Director's Name: {{ this.sportInput.SponsorName }}</p>
-    <p>
-      Number of teams: {{ this.sportInput.Organizations.length }}/{{
-        this.sportInput.MaxGroupSize
-      }}
-    </p>
+  <h1>Sport: {{ this.sportInput.GroupName }}</h1>
+  <div class="wrapper">
+    <div class="sportData">
+      <label>Sport Director's Name: {{ this.sportInput.SponsorName }}</label>
+      <label>
+        Number of teams: {{ this.sportInput.Organizations.length }}/{{
+          this.sportInput.MaxGroupSize
+        }}
+      </label>
+    </div>
+    <div class="btnContainer">
+      <app-edit-btn></app-edit-btn>
+      <app-delete-btn></app-delete-btn>
+    </div>
   </div>
 </section>

@@ -21,7 +21,7 @@ export class TeamDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.teamService.getSportsById(this.teamId).subscribe((sports) => this.sportList = sports);
     this.teamService.getTeamById(this.teamId).subscribe((team) => this.teamName = team.OrganizationName)
-    console.log(this.sportList.Organizations)
+    console.log(this.sportList?.Organizations)
   }
 
 }

@@ -10,7 +10,8 @@ import { Sport } from '../models/sport';
 export class TeamsService {
 
   teamsUrl = 'http://localhost:8082/api/organizations';
-  sportsTeamsUrl = 'http://localhost:8082/api/groups/byorganization'
+  sportsTeamsUrl = 'http://localhost:8082/api/groups/byorganization';
+  teamsUpdateUrl = 'http://localhost:8082/api/groups';
 
   jsonContentTypeHeaders = {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -36,6 +37,11 @@ export class TeamsService {
 
   getTeamById(teamId: string): Observable<Team> {
     const result: Observable<Team> = this.http.get<Team>(`${this.teamsUrl}/${teamId}`);
+    return result;
+  }
+
+  updateTeam(sportId: number, team: Team): Observable<Team> {
+    const result: Observable<Team> = this.http.put<Team>(`${this.teamsUpdateUrl}/${sportId}/organizations/${team.OrganizationId}`, team, this.jsonContentTypeHeaders);
     return result;
   }
 }

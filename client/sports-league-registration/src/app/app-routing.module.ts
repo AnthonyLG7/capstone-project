@@ -10,6 +10,7 @@ import { TeamDetailsComponent } from './team-details/team-details.component';
 import { CoachesComponent } from './coaches/coaches.component';
 import { PlayersComponent } from './players/players.component';
 import { SportFormComponent } from './sport-form/sport-form.component';
+import { TeamFormComponent } from './team-form/team-form.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,9 @@ const routes: Routes = [
           { path: 'sports', component: SportsComponent},
           { path: 'sports/:id', component: SportsDetailsComponent,
             children: [
-             { path: 'sports/:id/editSport', component: SportFormComponent}
+             { path: 'sports/:id/editSport', component: SportFormComponent},
+             { path: 'sports/:id/editTeam/:teamId', component: TeamFormComponent},
+             
            ]
           }
         ]
@@ -46,8 +49,9 @@ const routes: Routes = [
       {
         path: 'players', component: PlayersComponent
       },
-      { path: 'sports/:id/:sportFormStatus', component: SportFormComponent}
-
+      { path: 'sports/:id/:sportFormStatus', component: SportFormComponent},
+      { path: 'sports/:id/:teamFormStatus/:teamId', component: TeamFormComponent}
+      
       
     ]
   }

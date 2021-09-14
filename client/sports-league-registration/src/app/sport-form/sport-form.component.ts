@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SportsService } from '../services/sports.service';
 
 @Component({
@@ -26,7 +26,9 @@ export class SportFormComponent implements OnInit {
       this.formStatus = value.sportFormStatus;
       console.log(this.formStatus);
     });
-    this.sportsService.getSportById(this.currentSportId).subscribe((sportsObject) => {this.currentSport = sportsObject;});
+    this.sportsService.getSportById(this.currentSportId).subscribe((sportsObject) => {
+      this.currentSport = sportsObject;
+    });
     this.sportForm = this.formBuilder.group({
       'GroupId': [this.currentSport?.GroupId, [Validators.required]],
       'GroupName': [this.currentSport?.GroupName, [Validators.required]],

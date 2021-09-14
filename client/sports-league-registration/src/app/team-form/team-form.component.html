@@ -1,0 +1,113 @@
+<form
+  [formGroup]="teamForm"
+  (ngSubmit)="onSubmit(teamForm.value)"
+  class="box"
+  id="registerForm"
+>
+  <!-- <ng-container *ngIf="formStatus === 'editSport'" ; else second>
+    <p *ngIf="!sportForm.controls['sportname'].valid" class="formMessage">
+      Please enter a sport
+    </p>
+  </ng-container>
+  <ng-template #second>
+    <ng-container *ng-If="formStatus === 'addForm'">
+      <p
+        *ngIf="
+          !sportForm.controls['sportname'].valid &&
+          sportForm.controls['sportname'].touched
+        "
+        class="formMessage"
+      >
+        Please enter a sport
+      </p>
+    </ng-container>
+  </ng-template> -->
+  <h1>Team's Add/Edit Form</h1>
+
+  <label for="OrganizationId" class="block labelTop">Team ID</label>
+  <input
+    type="text"
+    id="OrganizationId"
+    formControlName="OrganizationId"
+    tabindex="1"
+    placeholder="Enter the team ID here."
+    [value]="currentTeam?.OrganizationId"
+  />
+
+  <label for="OrganizationName" class="block labelTop">Team Name</label>
+  <input
+    type="text"
+    id="OrganizationName"
+    formControlName="OrganizationName"
+    tabindex="1"
+    placeholder="Enter the team name here."
+    [value]="currentTeam?.OrganizationName"
+  />
+
+  <!-- <ng-container *ngIf="formStatus === 'editSport'" ; else second>
+    <p *ngIf="!sportForm.controls['sponsorname'].valid" class="formMessage">
+      Please enter a valid name
+    </p>
+  </ng-container>
+  <ng-template #second>
+    <ng-container *ng-If="formStatus === 'addForm'">
+      <p
+        *ngIf="
+          !sportForm.controls['sponsorname'].valid &&
+          sportForm.controls['sponsorname'].touched
+        "
+        class="formMessage"
+      >
+        Please enter a valid name
+      </p>
+    </ng-container>
+  </ng-template> -->
+
+  <label for="CoachName" class="block labelTop">Coach's Name</label>
+  <input
+    type="text"
+    id="CoachName"
+    formControlName="CoachName"
+    placeholder="Enter the  Coach's name here."
+    [value]="currentTeam?.CoachName"
+    tabindex="2"
+  />
+
+  <!-- <p
+    *ngIf="
+      !sportForm.controls['sponsorphone'].valid &&
+      sportForm.controls['sponsorphone'].touched
+    "
+    class="formMessage"
+  >
+    Please enter a valid phone
+  </p> -->
+
+  <label for="CoachPhoneNumber" class="block labelTop">Coach's Phone</label>
+  <input
+    type="tel"
+    id="CoachPhoneNumber"
+    formControlName="CoachPhoneNumber"
+    placeholder="Enter the  Coach's phone here."
+    [value]="currentTeam?.CoachPhoneNumber"
+    tabindex="3"
+  />
+
+  <input
+    type="submit"
+    tabindex="5"
+    id="submit-sport"
+    [value]="formStatus === 'editTeam' ? 'Update' : 'Add'"
+    class="regButton box-extra"
+  />
+  <input
+    type="button"
+    tabindex="6"
+    id="cancel-sport"
+    value="Cancel"
+    class="deleteButton box-extra"
+    (click)="cancelTeamForm()"
+  />
+</form>
+<!-- <p>Form Value: {{ sportForm?.value | json }}</p>
+<p>Form Status: {{ sportForm?.status | json }}</p> -->

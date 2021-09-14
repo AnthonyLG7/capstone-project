@@ -1,7 +1,13 @@
 <section class="teamContainer">
-  <div class="teamData">
-    <p>{{ currentTeam.OrganizationName }}</p>
-    <p>Coach's Name: {{ currentTeam.CoachName }}</p>
-    <p>Number of players: {{ currentTeam.Members.length }}/{{ 7 }}</p>
+  <h1>{{ currentTeam.OrganizationName }}</h1>
+  <div class="wrapper">
+    <div class="teamData">
+      <label>Coach's Name: {{ currentTeam.CoachName }}</label>
+      <label>Number of players: {{ currentTeam.Members.length }}/{{ 7 }}</label>
+    </div>
+    <div class="btnContainer">
+      <app-edit-btn></app-edit-btn>
+      <app-delete-btn></app-delete-btn>
+    </div>
   </div>
 </section>

@@ -1,24 +1,47 @@
 .teamContainer {
+  border: 1px solid #000;
+  background-color: #224870;
   display: flex;
   flex-direction: column;
-  border: 1px solid #000;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 720px;
   border-radius: 1em;
-  background-color: #224870;
-  width: 750px;
-  height: 125px;
-  margin: 15px;
-  justify-content: space-evenly;
-  cursor: pointer;
+  color: peachpuff;
 }
 .teamData {
   display: flex;
-  padding-left: 10px;
-  justify-content: space-evenly;
-  color: peachpuff;
-  font-weight: bold;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  padding-left: 25px;
 }
 .teamContainer:hover {
   background-color: #2a4494;
   box-shadow: 0 0 5px #4ea5d9;
   transform: scale(1.03);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px black solid;
+}
+label {
+  align-self: flex-start;
+}
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 25px;
+  width: 50%;
+}
+
+app-edit-btn,
+app-delete-btn {
+  width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { until } from 'protractor';
 import { Sport } from '../models/sport';
+import { Team } from '../models/team';
 import { SportsService } from '../services/sports.service';
 
 @Component({
@@ -25,6 +26,10 @@ export class SportsDetailsComponent implements OnInit {
 
   showSportEditForm(currentSport: Sport){
     this.router.navigateByUrl(`${this.router.url}/editSport`);
+  }
+
+  showTeamSportEditForm(currentTeam: Team) {
+    this.router.navigateByUrl(`${this.router.url}/editTeam/${currentTeam.OrganizationId}`);
   }
 
 }
