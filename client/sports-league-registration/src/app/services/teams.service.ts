@@ -45,6 +45,7 @@ export class TeamsService {
     return result;
   }
   updateTeamInTeams(team: Team): Observable<Team> {
+    console.log("inside update: " + team.OrganizationId);
     const result: Observable<Team> = this.http.put<Team>(`${this.teamsUrl}/${team.OrganizationId}`, team, this.jsonContentTypeHeaders);
     return result;
   }

@@ -24,15 +24,6 @@
   </ng-template> -->
   <h1>Team's Add/Edit Form</h1>
 
-  <label for="OrganizationId" class="block labelTop">Team ID</label>
-  <input
-    type="text"
-    id="OrganizationId"
-    formControlName="OrganizationId"
-    tabindex="1"
-    placeholder="Enter the team ID here."
-  />
-
   <label for="OrganizationName" class="block labelTop">Team Name</label>
   <input
     type="text"
@@ -40,6 +31,15 @@
     formControlName="OrganizationName"
     tabindex="1"
     placeholder="Enter the team name here."
+  />
+
+  <label for="OrganizationId" class="block labelTop">Team ID</label>
+  <input
+    type="text"
+    id="OrganizationId"
+    formControlName="OrganizationId"
+    tabindex="2"
+    placeholder="Enter the team ID here."
   />
 
   <!-- <ng-container *ngIf="formStatus === 'editSport'" ; else second>

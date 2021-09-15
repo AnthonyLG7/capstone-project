@@ -139,6 +139,11 @@ function isValidOrganization(organization) {
         organization.CoachPhoneNumber.trim() == ''
     )
         return 3
+    if (
+        organization.OrganizationId == undefined ||
+        organization.OrganizationId.trim() == ''
+    )
+        return 4
     return -1
 }
 
@@ -774,6 +779,76 @@ app.put('/api/members/:memberId', urlencodedParser, function (req, res) {
     console.log(match)
     res.status(200).send()
 })
+
+// EDIT AN Org in Org
+app.put('/api/organizations/:id', urlencodedParser, function (req, res) {
+    console.log(
+        'Received a PUT request to edit an organization in organizations.json'
+    )
+    console.log('BODY -------->' + JSON.stringify(req.body))
+
+    let organizationId = req.params.id
+    console.log('this ' + organizationId)
+
+    // assemble group information so we can validate it
+    let organization = {
+        OrganizationName: req.body.OrganizationName,
+        OrganizationId: req.body.OrganizationId,
+        CoachName: req.body.CoachName,
+        CoachPhoneNumber: req.body.CoachPhoneNumber,
+    }
+
+    console.log('Performing validation...')
+    let errorCode = isValidOrganization(organization)
+    if (errorCode != -1) {
+        console.log('Invalid data found! Reason: ' + errorCode)
+        res.status(400).send('Bad Request - Incorrect or Missing Data')
+        return
+    }
+
+    let data = fs.readFileSync(__dirname + '/data/organizations.json', 'utf8')
+    data = JSON.parse(data)
+
+    // find the group
+    let match = data.find((element) => element.OrganizationId == organizationId)
+
+    if (match == null) {
+        res.status(404).send('Organization Not Found')
+        return
+    }
+
+    // update the member
+    match.OrganizationName = req.body.OrganizationName
+    match.OrganizationId = req.body.OrganizationId
+    match.CoachName = req.body.CoachName
+    match.CoachPhoneNumber = req.body.CoachPhoneNumber
+
+    // make sure new values for MaxGroupSize doesn't invalidate grooup
+    // for (let key of match.Organizations) {
+    //     console.log(match.Organizations[key])
+    //     if (
+    //         Number(req.body.MaxGroupSize) <
+    //         match.Organizations[key].Members.length
+    //     ) {
+    //         res.status(409).send(
+    //             'New group size too small based on current number of members'
+    //         )
+    //         return
+    //     }
+    // }
+
+    //match.MaxGroupSize = Number(req.body.MaxGroupSize)
+
+    fs.writeFileSync(
+        __dirname + '/data/organizations.json',
+        JSON.stringify(data)
+    )
+
+    console.log('Update successful!  New values: ')
+    console.log(match)
+    res.status(200).send()
+})
+
 // EDIT AN Coach in Coach
 app.put('/api/coaches/:id', urlencodedParser, function (req, res) {
     console.log('Received a PUT request to edit a coach in coach.json')

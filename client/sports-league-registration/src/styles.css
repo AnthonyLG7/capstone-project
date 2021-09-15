@@ -128,9 +128,13 @@ div.mainContainer {
 }
 app-nav {
   margin-top: 90px;
+  border: 1px solid #000;
 }
 app-sport-form {
   width: 500px;
+}
+app-search-add-nav {
+  margin-top: 110px;
 }
 
 .viewButton:active,
