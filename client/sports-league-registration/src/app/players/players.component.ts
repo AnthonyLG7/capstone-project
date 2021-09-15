@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from '../models/player';
 import { PlayersService } from '../services/players.service';
 
@@ -16,7 +16,7 @@ export class PlayersComponent implements OnInit {
   teamId: string;
 
 
-  constructor(private playersService: PlayersService, private _router: ActivatedRoute) { }
+  constructor(private playersService: PlayersService, private _router: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this._router.url.subscribe((url) => {
@@ -43,6 +43,10 @@ export class PlayersComponent implements OnInit {
         this.players = playersObject;
       });
     }
+  }
+
+  showPlayersEditForm(player) {
+    this.router.navigateByUrl(`${this.router.url}/editPlayer/${player.MemberId}`);
   }
 
 }

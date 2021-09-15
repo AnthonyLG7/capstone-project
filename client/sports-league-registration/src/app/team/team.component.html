@@ -6,7 +6,7 @@
       <label>Number of players: {{ currentTeam.Members.length }}/{{ 7 }}</label>
     </div>
     <div class="btnContainer">
-      <app-edit-btn></app-edit-btn>
+      <app-edit-btn (click)="showTeamEditForm(currentTeam)"></app-edit-btn>
       <app-delete-btn></app-delete-btn>
     </div>
   </div>

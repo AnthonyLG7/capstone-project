@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TeamsService } from '../services/teams.service';
 import { Location } from '@angular/common';
+import { Sport } from '../models/sport';
 
 @Component({
   selector: 'app-team-form',
@@ -14,16 +15,29 @@ export class TeamFormComponent implements OnInit {
   teamForm: FormGroup;
   currentSportId: number;
   currentTeam;
+  sports: Sport[];
   currentTeamId: string;
   formStatus: string;
 
   constructor(private teamService: TeamsService, private formBuilder: FormBuilder, private _router: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
-    this._router.params.subscribe((value) => {
-      this.currentSportId = value.id;
-      this.formStatus = value.teamFormStatus;
-      this.currentTeamId = value.teamId;
+    this._router.url.subscribe((url) => {
+      console.log(url);
+      if(url.length === 3) {
+          this.currentTeamId = url[1]?.path;
+          this.formStatus = url[2]?.path;
+      } else {
+        this.currentSportId = Number(url[1]?.path);
+        this.formStatus = url[2]?.path;
+        this.currentTeamId = url[3]?.path;
+      }
+      
+      
+      
+      console.log(this.currentTeamId);
+      console.log(this.formStatus);
+      console.log(this.currentSportId);
     });
     this.teamService.getTeamById(this.currentTeamId).subscribe((teamObject) => {
       console.log(this.currentTeamId);
@@ -36,7 +50,6 @@ export class TeamFormComponent implements OnInit {
       'CoachName': [this.currentTeam?.CoachName, [Validators.required]],
       'CoachPhoneNumber': [this.currentTeam?.CoachPhoneNumber, [Validators.required]],
     });
-    console.log(this.currentTeam.CoachName);
   }
 
   cancelTeamForm() {
@@ -45,7 +58,14 @@ export class TeamFormComponent implements OnInit {
 
   onSubmit(formValues){
     //call service to add/update sport
-    this.teamService.updateTeam(this.currentSportId,formValues).subscribe((team) => this.teamService.getTeams())
+    if(this.currentSportId === NaN) {
+      this.teamService.getSportsById(this.currentTeamId).subscribe((value) => this.sports = value);
+      for (let i in this.sports) {
+        this.teamService.updateTeam(this.sports[i].GroupId,formValues).subscribe((team) => this.teamService.getTeams())
+      }
+    } else {
+      this.teamService.updateTeam(this.currentSportId,formValues).subscribe((team) => this.teamService.getTeams())
+    }
     console.log(formValues);
     console.log('pressed form');
     this.location.back();

@@ -11,6 +11,7 @@ import { CoachesComponent } from './coaches/coaches.component';
 import { PlayersComponent } from './players/players.component';
 import { SportFormComponent } from './sport-form/sport-form.component';
 import { TeamFormComponent } from './team-form/team-form.component';
+import { PlayerFormComponent } from './player-form/player-form.component';
 
 
 const routes: Routes = [
@@ -18,42 +19,18 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', component: BaseLandingPageComponent },
-      { path: 'sports', component: SportsComponent,
-        children: [
-          { path: 'sports', component: SportsComponent},
-          { path: 'sports/:id', component: SportsDetailsComponent,
-            children: [
-              { path: 'sports/:id/viewPlayers/:teamId', component: PlayersComponent},
-             { path: 'sports/:id/editSport', component: SportFormComponent},
-             { path: 'sports/:id/editTeam/:teamId', component: TeamFormComponent},
-             
-           ]
-          }
-        ]
-      },
-      {
-        path: 'sports/:id', component: SportsDetailsComponent
-      },
-      {
-        path: 'teams', component: TeamsComponent,
-        children: [
-          {path: 'teams', component: SportsComponent},
-          {path: 'teams/:id', component: SportsDetailsComponent}
-        ]
-      },
-      {
-        path: 'teams/:id', component: TeamDetailsComponent
-      },
-      {
-        path: 'coaches', component: CoachesComponent
-      },
-      {
-        path: 'players', component: PlayersComponent
-      },
-      { path: 'sports/:id/:sportFormStatus', component: SportFormComponent},
-      { path: 'sports/:id/:teamFormStatus/:teamId', component: TeamFormComponent},
-      { path: 'sports/:id/viewPlayers/:teamId', component: PlayersComponent}
-      
+      { path: 'sports/:id/:sportFormStatus', component: SportFormComponent },
+      { path: 'sports/:id/viewPlayers/:teamId', component: PlayersComponent },
+      { path: 'sports/:id/viewPlayers/:teamId/:playerFormStatus/:playerId', component: PlayerFormComponent },
+      { path: 'sports/:id/:teamFormStatus/:teamId', component: TeamFormComponent },
+      { path: 'sports', component: SportsComponent },
+      { path: 'sports/:id', component: SportsDetailsComponent },
+      { path: 'teams', component: TeamsComponent },
+      { path: 'teams/:id', component: TeamDetailsComponent },
+      { path: 'teams/:teamId/:teamFormStatus', component: TeamFormComponent},
+      { path: 'coaches', component: CoachesComponent },
+      { path: 'players', component: PlayersComponent },
+      { path: 'players/:sportFormStatus/:playerId', component: PlayerFormComponent }
     ]
   }
 ]

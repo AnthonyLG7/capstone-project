@@ -102,6 +102,22 @@ function isValidMember(member) {
     return -1
 }
 
+function isValidCoach(coach) {
+    if (
+        coach.OrganizationName == undefined ||
+        coach.OrganizationName.trim() == ''
+    )
+        return 1
+    if (coach.CoachName == undefined || coach.CoachName.trim() == '') return 2
+    if (
+        coach.CoachPhoneNumber == undefined ||
+        coach.CoachPhoneNumber.trim() == ''
+    )
+        return 3
+
+    return -1
+}
+
 function isValidOrganization(organization) {
     if (
         organization.OrganizationName == undefined ||
@@ -216,6 +232,25 @@ app.get('/api/coaches/:id', function (req, res) {
     let match = data.Coaches.find((element) => element.OrganizationName == id)
     if (match == null) {
         res.status(404).send('Coach Not Found')
+        return
+    }
+
+    console.log('Returned data is: ')
+    console.log(match)
+    res.end(JSON.stringify(match))
+})
+
+// GET MEMBER In MEMBER
+app.get('/api/members/:memberId', function (req, res) {
+    let memberId = req.params.memberId
+    console.log('Received a GET request for a member in member.json')
+
+    let data = fs.readFileSync(__dirname + '/data/members.json', 'utf8')
+    data = JSON.parse(data)
+
+    let match = data.find((element) => element.MemberId == memberId)
+    if (match == null) {
+        res.status(404).send('Member Not Found')
         return
     }
 
@@ -365,7 +400,7 @@ app.get(
 
         console.log('Returned data is: ')
         console.log(match)
-        res.end(JSON.stringify(match)).contentType('application/json')
+        res.end(JSON.stringify(match))
     }
 )
 
@@ -465,6 +500,78 @@ app.post('/api/groups', urlencodedParser, function (req, res) {
 
     //res.status(201).send();
     res.end(JSON.stringify(group))
+    // return the new group w it's GroupId
+})
+
+// ADD a COACH TO COACH
+app.post('/api/coaches', urlencodedParser, function (req, res) {
+    console.log('Received a POST request to add a coach')
+    console.log('BODY -------->' + JSON.stringify(req.body))
+
+    // assemble group information so we can validate it
+    let coach = {
+        OrganizationName: req.body.OrganizationName,
+        CoachName: req.body.CoachName,
+        CoachPhoneNumber: req.body.CoachPhoneNumber,
+    }
+
+    console.log('Performing validation...')
+    let errorCode = isValidCoach(coach)
+    if (errorCode != -1) {
+        console.log('Invalid data found! Reason: ' + errorCode)
+        res.status(400).send('Bad Request - Incorrect or Missing Data')
+        return
+    }
+
+    let data = fs.readFileSync(__dirname + '/data/coaches.json', 'utf8')
+    data = JSON.parse(data)
+
+    // add the group
+    data.push(coach)
+
+    fs.writeFileSync(__dirname + '/data/coaches.json', JSON.stringify(data))
+
+    console.log('Coach added: ')
+    console.log(coach)
+
+    //res.status(201).send();
+    res.end(JSON.stringify(coach))
+    // return the new group w it's GroupId
+})
+// ADD a MEMBER TO MEMBER
+app.post('/api/members', urlencodedParser, function (req, res) {
+    console.log('Received a POST request to add a coach')
+    console.log('BODY -------->' + JSON.stringify(req.body))
+
+    // assemble group information so we can validate it
+    let member = {
+        MemberId: getNextId('member'),
+        MemberEmail: req.body.MemberEmail,
+        MemberName: req.body.MemberName,
+        MemberPhone: req.body.MemberPhone,
+    }
+
+    console.log('Performing validation...')
+    let errorCode = isValidMember(member)
+    if (errorCode != -1) {
+        console.log('Invalid data found! Reason: ' + errorCode)
+        res.status(400).send('Bad Request - Incorrect or Missing Data')
+        return
+    }
+
+    let data = fs.readFileSync(__dirname + '/data/members.json', 'utf8')
+    data = JSON.parse(data)
+
+    // add the group
+    data.push(member)
+
+    fs.writeFileSync(__dirname + '/data/members.json', JSON.stringify(data))
+
+    console.log('Member added: ')
+    console.log(member)
+
+    //res.status(201).send();
+    res.end(JSON.stringify(member))
     // return the new group w it's GroupId
 })
 
@@ -601,6 +708,127 @@ app.put(
         res.status(200).send()
     }
 )
+
+// EDIT AN Member in MEMBER
+app.put('/api/members/:memberId', urlencodedParser, function (req, res) {
+    console.log('Received a PUT request to edit a member in members.json')
+    console.log('BODY -------->' + JSON.stringify(req.body))
+
+    let memberId = req.params.memberId
+
+    // assemble group information so we can validate it
+    let member = {
+        MemberEmail: req.body.MemberEmail,
+        MemberName: req.body.MemberName,
+        MemberPhone: req.body.MemberPhone,
+    }
+
+    console.log('Performing validation...')
+    let errorCode = isValidMember(member)
+    if (errorCode != -1) {
+        console.log('Invalid data found! Reason: ' + errorCode)
+        res.status(400).send('Bad Request - Incorrect or Missing Data')
+        return
+    }
+
+    let data = fs.readFileSync(__dirname + '/data/members.json', 'utf8')
+    data = JSON.parse(data)
+
+    // find the group
+    let match = data.find((element) => element.MemberId == memberId)
+    if (match == null) {
+        res.status(404).send('Group Not Found')
+        return
+    }
+
+    // update the member
+    match.MemberEmail = req.body.MemberEmail
+    match.MemberName = req.body.MemberName
+    match.MemberPhone = req.body.MemberPhone
+
+    // make sure new values for MaxGroupSize doesn't invalidate grooup
+    // for (let key of match.Organizations) {
+    //     console.log(match.Organizations[key])
+    //     if (
+    //         Number(req.body.MaxGroupSize) <
+    //         match.Organizations[key].Members.length
+    //     ) {
+    //         res.status(409).send(
+    //             'New group size too small based on current number of members'
+    //         )
+    //         return
+    //     }
+    // }
+
+    //match.MaxGroupSize = Number(req.body.MaxGroupSize)
+
+    fs.writeFileSync(__dirname + '/data/members.json', JSON.stringify(data))
+
+    console.log('Update successful!  New values: ')
+    console.log(match)
+    res.status(200).send()
+})
+// EDIT AN Coach in Coach
+app.put('/api/coaches/:id', urlencodedParser, function (req, res) {
+    console.log('Received a PUT request to edit a coach in coach.json')
+    console.log('BODY -------->' + JSON.stringify(req.body))
+
+    let organizationName = req.params.id
+
+    // assemble group information so we can validate it
+    let coach = {
+        OrganizationName: req.body.OrganizationName,
+        CoachName: req.body.CoachName,
+        CoachPhoneNumber: req.body.CoachPhoneNumber,
+    }
+
+    console.log('Performing validation...')
+    let errorCode = isValidCoach(coach)
+    if (errorCode != -1) {
+        console.log('Invalid data found! Reason: ' + errorCode)
+        res.status(400).send('Bad Request - Incorrect or Missing Data')
+        return
+    }
+
+    let data = fs.readFileSync(__dirname + '/data/coaches.json', 'utf8')
+    data = JSON.parse(data)
+
+    // find the group
+    let match = data.find(
+        (element) => element.OrganizationName == organizationName
+    )
+    if (match == null) {
+        res.status(404).send('Group Not Found')
+        return
+    }
+
+    // update the member
+    match.OrganizationName = req.body.OrganizationName
+    match.CoachName = req.body.CoachName
+    match.CoachPhoneNumber = req.body.CoachPhoneNumber
+
+    // make sure new values for MaxGroupSize doesn't invalidate grooup
+    // for (let key of match.Organizations) {
+    //     console.log(match.Organizations[key])
+    //     if (
+    //         Number(req.body.MaxGroupSize) <
+    //         match.Organizations[key].Members.length
+    //     ) {
+    //         res.status(409).send(
+    //             'New group size too small based on current number of members'
+    //         )
+    //         return
+    //     }
+    // }
+
+    //match.MaxGroupSize = Number(req.body.MaxGroupSize)
+
+    fs.writeFileSync(__dirname + '/data/coaches.json', JSON.stringify(data))
+
+    console.log('Update successful!  New values: ')
+    console.log(match)
+    res.status(200).send()
+})
 
 // DELETE A GROUP
 app.delete('/api/groups/:id', function (req, res) {
@@ -809,6 +1037,7 @@ app.put(
 
         // assemble member information so we can validate it
         let member = {
+            MemberId: req.body.MemberId,
             MemberEmail: req.body.MemberEmail,
             MemberName: req.body.MemberName,
             MemberPhone: req.body.MemberPhone,
@@ -850,6 +1079,7 @@ app.put(
         }
 
         // update the member
+        match.MemberId = req.body.MemberId
         match.MemberEmail = req.body.MemberEmail
         match.MemberName = req.body.MemberName
         match.MemberPhone = req.body.MemberPhone
@@ -983,7 +1213,7 @@ app.get('/api/username_available/:username', function (req, res) {
     }
 
     console.log('Is user name available? ' + message)
-    res.end(message).contentType('application/json')
+    res.end(message)
 })
 
 // POST request to add a user
@@ -1052,7 +1282,7 @@ app.post('/api/login', urlencodedParser, function (req, res) {
     // login successful - return user w/o password
     console.log('Login successful for: ')
     console.log(user)
-    res.end(JSON.stringify(user)).contentType('application/json')
+    res.end(JSON.stringify(user))
 })
 
 // ------------------------------------------------------------------------------

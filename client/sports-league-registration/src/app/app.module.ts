@@ -25,6 +25,8 @@ import { CoachesComponent } from './coaches/coaches.component';
 import { SportFormComponent } from './sport-form/sport-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamFormComponent } from './team-form/team-form.component';
+import { PlayerFormComponent } from './player-form/player-form.component';
+import { CoachFormComponent } from './coach-form/coach-form.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { TeamFormComponent } from './team-form/team-form.component';
     TeamDetailsComponent,
     CoachesComponent,
     SportFormComponent,
-    TeamFormComponent
+    TeamFormComponent,
+    PlayerFormComponent,
+    CoachFormComponent
   ],
   imports: [
     BrowserModule,

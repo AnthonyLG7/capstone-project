@@ -1,17 +1,1 @@
-[
-    {
-        "OrganizationName": "The UnLucky Losers",
-        "CoachName": "LosersMcLoseLose",
-        "CoachPhoneNumber": "374-2940"
-    },
-    {
-        "OrganizationName": "The Lucky Winners",
-        "CoachName": "CheaterMcCheatCheat",
-        "CoachPhoneNumber": "374-2938"
-    },
-    {
-        "OrganizationName": "The Middle Guys",
-        "CoachName": "WeDontWinButWeArentLast",
-        "CoachPhoneNumber": "374-7829"
-    }
-]
+[{"OrganizationName":"The UnLucky Losers","CoachName":"LosersMcLoseLose","CoachPhoneNumber":"374-2940"},{"OrganizationName":"The Lucky Winners","CoachName":"CheaterMcCheatCheat","CoachPhoneNumber":"374-2938"},{"OrganizationName":"The Middle Guys","CoachName":"WeDontWinButWeArentLast","CoachPhoneNumber":"374-7829"},{"OrganizationName":"Newest Team","CoachName":"TheBest","CoachPhoneNumber":"294-9182"}]

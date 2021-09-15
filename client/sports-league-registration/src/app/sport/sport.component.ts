@@ -1,4 +1,6 @@
+
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Sport } from '../models/sport';
 import { SportsService } from '../services/sports.service';
 
@@ -13,10 +15,14 @@ export class SportComponent implements OnInit {
   sports: Sport[];
   
 
-  constructor(private sportsService: SportsService) { }
+  constructor(private sportsService: SportsService, private router: Router) { }
 
   ngOnInit(): void {
     
+  }
+
+  showEditSportForm(sport: Sport) {
+    this.router.navigateByUrl(`${this.router.url}/${sport.GroupId}/editSport`);
   }
 
 }

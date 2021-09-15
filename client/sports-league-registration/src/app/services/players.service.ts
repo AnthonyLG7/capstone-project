@@ -11,6 +11,9 @@ export class PlayersService {
 
   playersUrl: string = 'http://localhost:8082/api/players';
   playersInSportUrl: string = 'http://localhost:8082/api/groups';
+  //http://localhost:8082/api/groups/:groupid/organizations/:orgid/members/:memberid
+  playerByIdUrl: string = 'http://localhost:8082/api/groups'
+  playerByPlayerUrl: string = 'http://localhost:8082/api/members'
 
   jsonContentTypeHeaders = {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -28,4 +31,18 @@ export class PlayersService {
     const results: Observable<Player[]> = this.http.get<Player[]>(`${this.playersInSportUrl}/${groupId}/organizations/${sportId}/members`);
     return results;
   }
+  getPlayerById(groupId: number, sportId: string, playerId: number): Observable<Player>{
+    const results: Observable<Player> = this.http.get<Player>(`${this.playerByIdUrl}/${groupId}/organizations/${sportId}/members/${playerId}`);
+    return results;
+  }
+  getPlayerInPlayer(playerId: number): Observable<Player> {
+    const result: Observable<Player> = this.http.get<Player>(`${this.playerByPlayerUrl}/${playerId}`);
+    return result;
+  }
+
+  updatePlayerInTeam(groupId: number, sportId: string, player: Player): Observable<Player> {
+    const result: Observable<Player> = this.http.put<Player>(`${this.playerByIdUrl}/${groupId}/organizations/${sportId}/members/${player.MemberId}`,player,this.jsonContentTypeHeaders );
+    return result
+  }
+
 }

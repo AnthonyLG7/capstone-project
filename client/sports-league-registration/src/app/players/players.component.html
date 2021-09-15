@@ -9,7 +9,7 @@
         <label>Player's Email: {{ player.MemberEmail }}</label>
       </div>
       <div class="btnContainer">
-        <app-edit-btn></app-edit-btn>
+        <app-edit-btn (click)="showPlayersEditForm(player)"></app-edit-btn>
         <app-delete-btn></app-delete-btn>
       </div>
     </div>
