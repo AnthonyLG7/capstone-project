@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Sport } from '../models/sport';
 import { Team } from '../models/team';
 import { TeamsService } from '../services/teams.service';
 
@@ -13,7 +14,7 @@ export class TeamDetailsComponent implements OnInit {
   teamId: string;
   sportList;
   teamName: string
-  constructor(private teamService: TeamsService, private route: ActivatedRoute) { 
+  constructor(private teamService: TeamsService, private route: ActivatedRoute, private router: Router) { 
     route.params.subscribe((value) => this.teamId = value.id);
     console.log(this.teamId);
   }
@@ -22,6 +23,15 @@ export class TeamDetailsComponent implements OnInit {
     this.teamService.getSportsById(this.teamId).subscribe((sports) => this.sportList = sports);
     this.teamService.getTeamById(this.teamId).subscribe((team) => this.teamName = team.OrganizationName)
     console.log(this.sportList?.Organizations)
+  }
+
+  viewPlayers(sport: Sport) {
+    this.router.navigateByUrl(`${this.router.url}/viewPlayers/${sport.GroupId}`);
+  }
+
+  showTeamSportEditForm(sport: Sport) {
+    console.log('I am pressed');
+    this.router.navigateByUrl(`${this.router.url}/editSport/${sport.GroupId}`)
   }
 
 }

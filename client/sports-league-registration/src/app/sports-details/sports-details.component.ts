@@ -28,6 +28,7 @@ export class SportsDetailsComponent implements OnInit {
   }
 
   showTeamSportEditForm(currentTeam: Team) {
+
     this.router.navigateByUrl(`${this.router.url}/editTeam/${currentTeam.OrganizationId}`);
     console.log("I am accidentally pressed")
   }

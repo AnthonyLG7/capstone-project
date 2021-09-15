@@ -15,16 +15,27 @@ export class SportFormComponent implements OnInit {
   currentSport;
   currentSportId: number;
   formStatus: string;
+  workflow: string;
+
   constructor(private sportsService: SportsService,private formBuilder: FormBuilder, private _router: ActivatedRoute, private location: Location) {
       
    }
 
   ngOnInit(): void {
+    this._router.url.subscribe((url) =>{
+      console.log(url);
+      this.workflow = url[0].path;
+    })
     this._router.params.subscribe((value) => { 
-      this.currentSportId = value.id; 
-      console.log(this.currentSportId);
-      this.formStatus = value.sportFormStatus;
-      console.log(this.formStatus);
+      if(this.workflow === 'sports') {
+        this.currentSportId = value.id; 
+        console.log(this.currentSportId);
+        this.formStatus = value.sportFormStatus;
+        console.log(this.formStatus);
+      } else {
+        this.currentSportId = value.sportId;
+        this.formStatus = value.sportFormStatus;
+      }
     });
     this.sportsService.getSportById(this.currentSportId).subscribe((sportsObject) => {
       this.currentSport = sportsObject;
