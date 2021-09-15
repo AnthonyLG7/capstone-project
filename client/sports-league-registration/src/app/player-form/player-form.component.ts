@@ -40,10 +40,12 @@ export class PlayerFormComponent implements OnInit {
     if(this.workflow === 'sports') {
       this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId).subscribe((playerObject) => {
         this.currentPlayer = playerObject;
+        this.playerForm.patchValue(this.currentPlayer);
     })
     } else {
       this.playerService.getPlayerInPlayer(this.currentPlayerId).subscribe((playerObject) => {
         this.currentPlayer = playerObject;
+        this.playerForm.patchValue(this.currentPlayer);
       })
     }
     this.playerForm = this.formBuilder.group({

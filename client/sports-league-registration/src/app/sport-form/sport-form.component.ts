@@ -39,6 +39,7 @@ export class SportFormComponent implements OnInit {
     });
     this.sportsService.getSportById(this.currentSportId).subscribe((sportsObject) => {
       this.currentSport = sportsObject;
+      this.sportForm.patchValue(this.currentSport);
     });
     this.sportForm = this.formBuilder.group({
       'GroupId': [this.currentSport?.GroupId, [Validators.required]],

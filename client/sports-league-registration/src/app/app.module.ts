@@ -27,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { PlayerFormComponent } from './player-form/player-form.component';
 import { CoachFormComponent } from './coach-form/coach-form.component';
+import { SearchAddNavComponent } from './search-add-nav/search-add-nav.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CoachFormComponent } from './coach-form/coach-form.component';
     SportFormComponent,
     TeamFormComponent,
     PlayerFormComponent,
-    CoachFormComponent
+    CoachFormComponent,
+    SearchAddNavComponent
   ],
   imports: [
     BrowserModule,

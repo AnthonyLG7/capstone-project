@@ -44,4 +44,8 @@ export class TeamsService {
     const result: Observable<Team> = this.http.put<Team>(`${this.teamsUpdateUrl}/${sportId}/organizations/${team.OrganizationId}`, team, this.jsonContentTypeHeaders);
     return result;
   }
+  updateTeamInTeams(team: Team): Observable<Team> {
+    const result: Observable<Team> = this.http.put<Team>(`${this.teamsUrl}/${team.OrganizationId}`, team, this.jsonContentTypeHeaders);
+    return result;
+  }
 }

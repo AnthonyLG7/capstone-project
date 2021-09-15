@@ -43,6 +43,7 @@ export class TeamFormComponent implements OnInit {
       console.log(this.currentTeamId);
       this.currentTeam = teamObject;
       console.log(this.currentTeam);
+      this.teamForm.patchValue(this.currentTeam);
     });
     this.teamForm = this.formBuilder.group({
       'OrganizationId': [this.currentTeam?.OrganizationId, [Validators.required]],
@@ -58,13 +59,11 @@ export class TeamFormComponent implements OnInit {
 
   onSubmit(formValues){
     //call service to add/update sport
+    console.log(formValues);
     if(this.currentSportId === NaN) {
-      this.teamService.getSportsById(this.currentTeamId).subscribe((value) => this.sports = value);
-      for (let i in this.sports) {
-        this.teamService.updateTeam(this.sports[i].GroupId,formValues).subscribe((team) => this.teamService.getTeams())
-      }
+        this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams())
     } else {
-      this.teamService.updateTeam(this.currentSportId,formValues).subscribe((team) => this.teamService.getTeams())
+      this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams())
     }
     console.log(formValues);
     console.log('pressed form');

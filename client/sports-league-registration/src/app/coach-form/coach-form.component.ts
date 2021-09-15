@@ -21,11 +21,13 @@ export class CoachFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.url.subscribe((url) => {
+      console.log(url);
       this.formStatus = url[1].path;
       this.coachId = Number(url[2].path);
     })
     this.coachService.getCoachByTeam(this.coachId).subscribe((coachObject) => {
       this.coach = coachObject;
+      this.coachForm.patchValue(this.coach);
     })
     this.coachForm = this.formBuilder.group({
       'CoachId': [this.coach?.CoachId, [Validators.required]],
@@ -37,9 +39,8 @@ export class CoachFormComponent implements OnInit {
   }
 
   onSubmit(coach: Coach) {
-    this.coachService.updateCoach(coach).subscribe((coach) => {
-      this.coachService.getCoaches();
-    })
+    this.coachService.updateCoach(coach).subscribe((coach) => 
+      this.coachService.getCoaches());
     this.location.back();
   }
 

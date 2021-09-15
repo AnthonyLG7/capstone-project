@@ -31,7 +31,6 @@
     formControlName="GroupId"
     tabindex="1"
     placeholder="Enter the sport ID here."
-    [value]="currentSport?.GroupId"
   />
 
   <label for="GroupName" class="block labelTop">Sport Name</label>
@@ -41,7 +40,6 @@
     formControlName="GroupName"
     tabindex="1"
     placeholder="Enter the sport name here."
-    [value]="currentSport?.GroupName"
   />
 
   <!-- <ng-container *ngIf="formStatus === 'editSport'" ; else second>
@@ -69,7 +67,6 @@
     id="SponsorName"
     formControlName="SponsorName"
     placeholder="Enter the  Sponsor's name here."
-    [value]="currentSport?.SponsorName"
     tabindex="2"
   />
 
@@ -89,7 +86,6 @@
     id="SponsorPhone"
     formControlName="SponsorPhone"
     placeholder="Enter the  Sponsor's name here."
-    [value]="currentSport?.SponsorPhone"
     tabindex="3"
   />
 
@@ -108,7 +104,6 @@
     id="SponsorEmail"
     formControlName="SponsorEmail"
     placeholder="Enter the  Sponsor's email here."
-    [value]="currentSport?.SponsorEmail"
     minlength="5"
     tabindex="4"
   />

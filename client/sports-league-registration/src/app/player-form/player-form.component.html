@@ -31,7 +31,6 @@
     formControlName="MemberId"
     tabindex="1"
     placeholder="Enter the player ID here."
-    [value]="currentPlayer?.MemberId"
   />
 
   <label for="MemberEmail" class="block labelTop">Player's Email</label>
@@ -39,9 +38,8 @@
     type="email"
     id="MemberEmail"
     formControlName="MemberEmail"
-    tabindex="1"
+    tabindex="2"
     placeholder="Enter the email name here."
-    [value]="currentPlayer?.MemberEmail"
   />
 
   <!-- <ng-container *ngIf="formStatus === 'editSport'" ; else second>
@@ -69,8 +67,7 @@
     id="MemberName"
     formControlName="MemberName"
     placeholder="Enter the  Player's name here."
-    [value]="currentPlayer?.MemberName"
-    tabindex="2"
+    tabindex="3"
   />
 
   <!-- <p
@@ -89,8 +86,7 @@
     id="MemberPhone"
     formControlName="MemberPhone"
     placeholder="Enter the  Coach's phone here."
-    [value]="currentPlayer?.MemberPhone"
-    tabindex="3"
+    tabindex="4"
   />
 
   <input

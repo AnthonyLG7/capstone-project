@@ -783,8 +783,8 @@ app.put('/api/coaches/:id', urlencodedParser, function (req, res) {
 
     // assemble group information so we can validate it
     let coach = {
-        CoachId: req.body.CoachId,
         OrganizationName: req.body.OrganizationName,
+        CoachId: req.body.CoachId,
         CoachName: req.body.CoachName,
         CoachPhoneNumber: req.body.CoachPhoneNumber,
     }
