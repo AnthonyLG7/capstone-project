@@ -12,6 +12,7 @@ import { PlayersComponent } from './players/players.component';
 import { SportFormComponent } from './sport-form/sport-form.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { PlayerFormComponent } from './player-form/player-form.component';
+import { CoachFormComponent } from './coach-form/coach-form.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'teams/:id', component: TeamDetailsComponent },
       { path: 'teams/:teamId/:teamFormStatus', component: TeamFormComponent},
       { path: 'coaches', component: CoachesComponent },
+      { path: 'coaches/editCoaches/:orgName', component: CoachFormComponent },
       { path: 'players', component: PlayersComponent },
       { path: 'players/:sportFormStatus/:playerId', component: PlayerFormComponent }
     ]

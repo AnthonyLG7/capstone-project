@@ -21,4 +21,14 @@ export class CoachesService {
     console.log(results);
     return results;
   }
+
+  getCoachByTeam(coachId: number): Observable<Coach> {
+    const results: Observable<Coach> = this.http.get<Coach>(`${this.coachesUrl}/${coachId}`);
+    return results;
+  }
+
+  updateCoach(coach: Coach): Observable<Coach> {
+    const results: Observable<Coach> = this.http.put<Coach>(`${this.coachesUrl}/${coach.CoachId}`, coach, this.jsonContentTypeHeaders);
+    return results;
+  }
 }

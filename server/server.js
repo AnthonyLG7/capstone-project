@@ -69,6 +69,10 @@ function getNextId(counterType) {
             id = data.nextOrganization
             data.nextOrganization++
             break
+        case 'coach':
+            id = data.nextCoach
+            data.nextCoach++
+            break
     }
 
     // save the updated counter
@@ -114,6 +118,7 @@ function isValidCoach(coach) {
         coach.CoachPhoneNumber.trim() == ''
     )
         return 3
+    if (coach.CoachId == undefined || coach.CoachId.trim() == '') return 4
 
     return -1
 }
@@ -229,7 +234,7 @@ app.get('/api/coaches/:id', function (req, res) {
     let data = fs.readFileSync(__dirname + '/data/coaches.json', 'utf8')
     data = JSON.parse(data)
 
-    let match = data.Coaches.find((element) => element.OrganizationName == id)
+    let match = data.find((element) => element.CoachId == id)
     if (match == null) {
         res.status(404).send('Coach Not Found')
         return
@@ -510,6 +515,7 @@ app.post('/api/coaches', urlencodedParser, function (req, res) {
 
     // assemble group information so we can validate it
     let coach = {
+        CoachId: req.body.CoachId,
         OrganizationName: req.body.OrganizationName,
         CoachName: req.body.CoachName,
         CoachPhoneNumber: req.body.CoachPhoneNumber,
@@ -773,10 +779,11 @@ app.put('/api/coaches/:id', urlencodedParser, function (req, res) {
     console.log('Received a PUT request to edit a coach in coach.json')
     console.log('BODY -------->' + JSON.stringify(req.body))
 
-    let organizationName = req.params.id
+    let coachId = req.params.id
 
     // assemble group information so we can validate it
     let coach = {
+        CoachId: req.body.CoachId,
         OrganizationName: req.body.OrganizationName,
         CoachName: req.body.CoachName,
         CoachPhoneNumber: req.body.CoachPhoneNumber,
@@ -794,15 +801,14 @@ app.put('/api/coaches/:id', urlencodedParser, function (req, res) {
     data = JSON.parse(data)
 
     // find the group
-    let match = data.find(
-        (element) => element.OrganizationName == organizationName
-    )
+    let match = data.find((element) => element.CoachId == coachId)
     if (match == null) {
         res.status(404).send('Group Not Found')
         return
     }
 
     // update the member
+    match.CoachId = req.body.CoachId
     match.OrganizationName = req.body.OrganizationName
     match.CoachName = req.body.CoachName
     match.CoachPhoneNumber = req.body.CoachPhoneNumber
