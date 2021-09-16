@@ -486,7 +486,7 @@ app.post('/api/groups', urlencodedParser, function (req, res) {
         SponsorName: req.body.SponsorName,
         SponsorPhone: req.body.SponsorPhone,
         SponsorEmail: req.body.SponsorEmail,
-        MaxGroupSize: Number(req.body.MaxGroupSize),
+        MaxGroupSize: 7,
     }
 
     console.log('Performing validation...')

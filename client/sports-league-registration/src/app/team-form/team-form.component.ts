@@ -61,9 +61,9 @@ export class TeamFormComponent implements OnInit {
     //call service to add/update sport
     console.log(formValues);
     if(this.currentSportId === NaN) {
-        this.teamService.updateTeamInTeams(formValues).subscribe((team) => console.log("logging here"))
+        this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams())
     } else {
-      this.teamService.updateTeamInTeams(formValues).subscribe((team) => console.log("not logging there") )
+      this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams() )
     }
     console.log(formValues);
     console.log('pressed form');

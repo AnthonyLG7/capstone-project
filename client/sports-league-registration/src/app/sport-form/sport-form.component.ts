@@ -37,10 +37,12 @@ export class SportFormComponent implements OnInit {
         this.formStatus = value.sportFormStatus;
       }
     });
-    this.sportsService.getSportById(this.currentSportId).subscribe((sportsObject) => {
-      this.currentSport = sportsObject;
-      this.sportForm.patchValue(this.currentSport);
-    });
+    if(this.currentSportId !== undefined) {
+      this.sportsService.getSportById(this.currentSportId).subscribe((sportsObject) => {
+        this.currentSport = sportsObject;
+        this.sportForm.patchValue(this.currentSport);
+      });
+    }
     this.sportForm = this.formBuilder.group({
       'GroupId': [this.currentSport?.GroupId, [Validators.required]],
       'GroupName': [this.currentSport?.GroupName, [Validators.required]],
@@ -53,9 +55,16 @@ export class SportFormComponent implements OnInit {
 
   onSubmit(formValues){
     //call service to add/update sport
-    this.sportsService.updateSport(formValues).subscribe((sport) => this.sportsService.getSports())
-    console.log(formValues);
-    console.log('pressed form');
+    console.log(this.formStatus);
+    if(this.formStatus === 'editSport'){
+      this.sportsService.updateSport(formValues).subscribe((sport) => this.sportsService.getSports())
+      console.log(formValues);
+      console.log('pressed form');
+    } else if(this.formStatus === 'addSport') {
+      console.log("Adding...")
+      console.log(formValues);
+      this.sportsService.addSport(formValues).subscribe((sport) => this.sportsService.getSports())
+    }
     this.location.back();
   }
   

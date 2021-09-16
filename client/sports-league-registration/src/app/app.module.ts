@@ -28,6 +28,7 @@ import { TeamFormComponent } from './team-form/team-form.component';
 import { PlayerFormComponent } from './player-form/player-form.component';
 import { CoachFormComponent } from './coach-form/coach-form.component';
 import { SearchAddNavComponent } from './search-add-nav/search-add-nav.component';
+import { AddBtnComponent } from './add-btn/add-btn.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SearchAddNavComponent } from './search-add-nav/search-add-nav.component
     TeamFormComponent,
     PlayerFormComponent,
     CoachFormComponent,
-    SearchAddNavComponent
+    SearchAddNavComponent,
+    AddBtnComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import { SearchAddNavComponent } from './search-add-nav/search-add-nav.component
     HttpClientModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

@@ -44,5 +44,9 @@ export class PlayersService {
     const result: Observable<Player> = this.http.put<Player>(`${this.playerByIdUrl}/${groupId}/organizations/${sportId}/members/${player.MemberId}`,player,this.jsonContentTypeHeaders );
     return result
   }
+  updatePlayerInPlayer(player: Player) : Observable<Player> {
+    const result : Observable<Player> = this.http.put<Player>(`${this.playerByPlayerUrl}/${player.MemberId}`,player,this.jsonContentTypeHeaders);
+    return result;
+  }
 
 }

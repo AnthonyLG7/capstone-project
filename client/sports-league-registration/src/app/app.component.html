@@ -1,7 +1,7 @@
 <div id="container">
   <app-header></app-header>
   <app-nav [hidden]="this.router.url === '/'"></app-nav>
-  <app-search-add-nav></app-search-add-nav>
+  <app-search-add-nav [hidden]="this.router.url === '/'"></app-search-add-nav>
   <app-main class="mcontainer"></app-main>
   <app-footer></app-footer>
 </div>
