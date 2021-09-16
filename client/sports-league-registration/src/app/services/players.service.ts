@@ -9,7 +9,7 @@ import { Sport } from '../models/sport';
 })
 export class PlayersService {
 
-  playersUrl: string = 'http://localhost:8082/api/players';
+  playersUrl: string = 'http://localhost:8082/api/members';
   playersInSportUrl: string = 'http://localhost:8082/api/groups';
   //http://localhost:8082/api/groups/:groupid/organizations/:orgid/members/:memberid
   playerByIdUrl: string = 'http://localhost:8082/api/groups'
@@ -20,6 +20,11 @@ export class PlayersService {
   }
 
   constructor(private http: HttpClient) { }
+
+  addPlayer(player: Player): Observable<Player> {
+    const result: Observable<Player> = this.http.post<Player>(this.playersUrl,player,this.jsonContentTypeHeaders);
+    return result;
+  }
 
   getPlayers(): Observable<Player[]> {
     const results: Observable<Player[]> = this.http.get<Player[]>(this.playersUrl);

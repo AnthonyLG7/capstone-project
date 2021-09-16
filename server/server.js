@@ -190,7 +190,7 @@ app.get('/api/coaches', function (req, res) {
     res.end(JSON.stringify(data))
 })
 //GET ALL PLAYERS
-app.get('/api/players', function (req, res) {
+app.get('/api/members', function (req, res) {
     console.log('Received a GET request for all players')
 
     let data = fs.readFileSync(__dirname + '/data/members.json', 'utf8')

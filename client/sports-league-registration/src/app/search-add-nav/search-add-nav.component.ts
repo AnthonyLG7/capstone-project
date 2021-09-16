@@ -38,6 +38,9 @@ console.log(this.router.url);
     }
     else {
       console.log("I am adding player")
+      if(this.router.url !== `${this.router.url}/addPlayer`) {
+        this.router.navigateByUrl(`${this.router.url}/addPlayer`);
+      }
     }
   }
 

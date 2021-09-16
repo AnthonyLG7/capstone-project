@@ -38,6 +38,7 @@ const routes: Routes = [
       { path: 'coaches/addCoaches', component: CoachFormComponent },
       { path: 'coaches/editCoaches/:orgName', component: CoachFormComponent },
       { path: 'players', component: PlayersComponent },
+      { path: 'players/addPlayer', component: PlayerFormComponent },
       { path: 'players/:sportFormStatus/:playerId', component: PlayerFormComponent }
     ]
   }

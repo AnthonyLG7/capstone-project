@@ -25,7 +25,11 @@ export class PlayerFormComponent implements OnInit {
   ngOnInit(): void {
     this._router.url.subscribe((url) => {
       console.log(url);
-      if(url.length == 3) {
+      if(url.length === 2) {
+        this.formStatus = url[1].path;
+        console.log(url[1].path);
+      }
+      else if(url.length === 3) {
         this.workflow = url[0]?.path;
         this.formStatus = url[1]?.path;
         this.currentPlayerId = Number(url[2]?.path);
@@ -38,15 +42,19 @@ export class PlayerFormComponent implements OnInit {
       }
     })
     if(this.workflow === 'sports') {
-      this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId).subscribe((playerObject) => {
-        this.currentPlayer = playerObject;
-        this.playerForm.patchValue(this.currentPlayer);
-    })
-    } else {
-      this.playerService.getPlayerInPlayer(this.currentPlayerId).subscribe((playerObject) => {
-        this.currentPlayer = playerObject;
-        this.playerForm.patchValue(this.currentPlayer);
+      if(!Number.isNaN(this.currentPlayerId) && this.currentPlayerId !== undefined) {
+        this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId).subscribe((playerObject) => {
+          this.currentPlayer = playerObject;
+          this.playerForm.patchValue(this.currentPlayer);
       })
+      }
+    } else {
+      if(!Number.isNaN(this.currentPlayerId) && this.currentPlayerId !== undefined){
+        this.playerService.getPlayerInPlayer(this.currentPlayerId).subscribe((playerObject) => {
+          this.currentPlayer = playerObject;
+          this.playerForm.patchValue(this.currentPlayer);
+        })
+      }
     }
     this.playerForm = this.formBuilder.group({
       'MemberId': [this.currentPlayer?.MemberId, [Validators.required]],
@@ -54,7 +62,7 @@ export class PlayerFormComponent implements OnInit {
       'MemberName': [this.currentPlayer?.MemberName, [Validators.required]],
       'MemberPhone': [this.currentPlayer?.MemberPhone, [Validators.required]]
     })
-
+    
     
     
   }
@@ -64,7 +72,12 @@ export class PlayerFormComponent implements OnInit {
   }
 
   onSubmit(formValues){
-    this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayers())
+    console.log('formStatus' + this.formStatus)
+    if (this.formStatus === 'editPlayer') {
+      this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayers())
+    } else if (this.formStatus === 'addPlayer') {
+      this.playerService.addPlayer(formValues).subscribe((player) => this.playerService.getPlayers());
+    }
     //console.log(formValues);
     this.location.back();
   }
