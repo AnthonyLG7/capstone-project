@@ -549,6 +549,49 @@ app.post('/api/coaches', urlencodedParser, function (req, res) {
     res.end(JSON.stringify(coach))
     // return the new group w it's GroupId
 })
+
+// ADD a ORG TO ORG
+app.post('/api/organizations', urlencodedParser, function (req, res) {
+    console.log('Received a POST request to add a team')
+    console.log('BODY -------->' + JSON.stringify(req.body))
+
+    // assemble group information so we can validate it
+    let orgId = getNextId('organization')
+    let organization = {
+        OrganizationId: `Org${orgId}`,
+        OrganizationName: req.body.OrganizationName,
+        CoachName: req.body.CoachName,
+        CoachPhoneNumber: req.body.CoachPhoneNumber,
+        Members: [],
+    }
+
+    console.log('Performing organization validation...')
+    let errorCode = isValidOrganization(organization)
+    if (errorCode != -1) {
+        console.log('Invalid data found! Reason: ' + errorCode)
+        res.status(400).send('Bad Request - Incorrect or Missing Data')
+        return
+    }
+
+    let data = fs.readFileSync(__dirname + '/data/organizations.json', 'utf8')
+    data = JSON.parse(data)
+
+    // add the group
+    data.push(organization)
+
+    fs.writeFileSync(
+        __dirname + '/data/organizations.json',
+        JSON.stringify(data)
+    )
+
+    console.log('Team added: ')
+    console.log(organization)
+
+    //res.status(201).send();
+    res.end(JSON.stringify(organization))
+    // return the new group w it's GroupId
+})
+
 // ADD a MEMBER TO MEMBER
 app.post('/api/members', urlencodedParser, function (req, res) {
     console.log('Received a POST request to add a coach')

@@ -29,8 +29,12 @@ console.log(this.router.url);
 
     } else if (this.workflow === 'teams'){
       console.log("I am adding a team")
+      if(this.url.length === 2){
+        this.router.navigateByUrl(`${this.router.url}/addTeam`);
+      }
     } else if (this.workflow === 'coaches') {
       console.log("I am adding a coach")
+      this.router.navigateByUrl(`${this.router.url}/addCoaches`);
     }
     else {
       console.log("I am adding player")

@@ -24,6 +24,11 @@ export class TeamsService {
 
   constructor(private http: HttpClient) { }
 
+  addTeam(team: Team): Observable<Team> {
+    const result: Observable<Team> = this.http.post<Team>(`${this.teamsUrl}`, team, this.jsonContentTypeHeaders);
+    return result;
+  }
+
   getTeams(): Observable<Team[]> {
     const results: Observable<Team[]> = this.http.get<Team[]>(this.teamsUrl);
     console.log(results);

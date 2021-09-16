@@ -26,17 +26,23 @@ export class SportFormComponent implements OnInit {
       console.log(url);
       this.workflow = url[0].path;
     })
-    this._router.params.subscribe((value) => { 
+    this._router.params.subscribe((value) => {  
       if(this.workflow === 'sports') {
+        
         this.currentSportId = value.id; 
         console.log(this.currentSportId);
         this.formStatus = value.sportFormStatus;
-        console.log(this.formStatus);
+
+       
       } else {
         this.currentSportId = value.sportId;
         this.formStatus = value.sportFormStatus;
       }
     });
+    if(this.formStatus === undefined) {
+      this.formStatus = 'addSport';
+    }
+    console.log(this.formStatus);
     if(this.currentSportId !== undefined) {
       this.sportsService.getSportById(this.currentSportId).subscribe((sportsObject) => {
         this.currentSport = sportsObject;

@@ -24,7 +24,10 @@ export class TeamFormComponent implements OnInit {
   ngOnInit(): void {
     this._router.url.subscribe((url) => {
       console.log(url);
-      if(url.length === 3) {
+      if(url.length === 2) {
+        this.formStatus = url[1].path
+      }
+       else if(url.length === 3) {
           this.currentTeamId = url[1]?.path;
           this.formStatus = url[2]?.path;
       } else {
@@ -39,12 +42,14 @@ export class TeamFormComponent implements OnInit {
       console.log(this.formStatus);
       console.log(this.currentSportId);
     });
-    this.teamService.getTeamById(this.currentTeamId).subscribe((teamObject) => {
-      console.log(this.currentTeamId);
-      this.currentTeam = teamObject;
-      console.log(this.currentTeam);
-      this.teamForm.patchValue(this.currentTeam);
-    });
+    if(this.currentTeamId !== undefined) {
+      this.teamService.getTeamById(this.currentTeamId).subscribe((teamObject) => {
+        console.log(this.currentTeamId);
+        this.currentTeam = teamObject;
+        console.log(this.currentTeam);
+        this.teamForm.patchValue(this.currentTeam);
+      });
+    }
     this.teamForm = this.formBuilder.group({
       'OrganizationId': [this.currentTeam?.OrganizationId, [Validators.required]],
       'OrganizationName': [this.currentTeam?.OrganizationName, [Validators.required]],
@@ -59,11 +64,16 @@ export class TeamFormComponent implements OnInit {
 
   onSubmit(formValues){
     //call service to add/update sport
-    console.log(formValues);
-    if(this.currentSportId === NaN) {
-        this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams())
-    } else {
-      this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams() )
+    console.log('formStatus: ' + this.formStatus);
+    if(this.formStatus === 'editTeam') {
+      if(this.currentSportId === NaN) {
+          this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams())
+      } else {
+        this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams() )
+      }
+    } else if ( this.formStatus === 'addTeam') {
+      console.log("adding new team");
+      this.teamService.addTeam(formValues).subscribe((team) => this.teamService.getTeams())
     }
     console.log(formValues);
     console.log('pressed form');
