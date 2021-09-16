@@ -20,7 +20,10 @@ li > a {
   padding-left: 0.45em;
   cursor: pointer;
 }
-select {
+input {
   width: 300px;
   margin-right: 40px;
+  border-radius: 10px;
+  border: #6f9ceb;
+  outline: none;
 }
