@@ -31,6 +31,11 @@ export class CoachesComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   deleteCoach(coach: Coach) {
-    this.coachesService.deleteCoach(coach).subscribe((coach) => this.coachesService.getCoaches());
+    let result = confirm("You are about to delete a coach! Are you sure?");
+    if(result) {
+      this.coachesService.deleteCoach(coach).subscribe((coach) => this.coachesService.getCoaches())
+      window.location.reload();
+    }
+    
   }
 }

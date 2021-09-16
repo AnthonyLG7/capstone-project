@@ -49,6 +49,8 @@ function getNextId(counterType) {
     let data = fs.readFileSync(__dirname + '/data/counters.json', 'utf8')
     data = JSON.parse(data)
 
+    console.log('I am called')
+
     // find the next id from the counters file and then increment the
     // counter in the file to indicate that id was used
     let id = -1
@@ -74,6 +76,8 @@ function getNextId(counterType) {
             data.nextCoach++
             break
     }
+    fs.writeFileSync(__dirname + '/data/counters.json', JSON.stringify(data))
+    return id
 }
 function decrementCounter(counterType) {
     // use 'group' or 'member' or 'user' as counterType
@@ -116,12 +120,13 @@ function decrementCounter(counterType) {
 // ------ Validation helpers ------------------
 
 function isValidGroup(team) {
-    if (team.GroupName == undefined || team.GroupName.trim() == '') return 1
-    if (team.SponsorName == undefined || team.SponsorName.trim() == '') return 2
+    if (team.GroupId == undefined || isNaN(team.GroupId)) return 1
+    if (team.GroupName == undefined || team.GroupName.trim() == '') return 2
+    if (team.SponsorName == undefined || team.SponsorName.trim() == '') return 3
     if (team.SponsorPhone == undefined || team.SponsorPhone.trim() == '')
-        return 3
-    if (team.SponsorEmail == undefined || team.SponsorEmail.trim() == '')
         return 4
+    if (team.SponsorEmail == undefined || team.SponsorEmail.trim() == '')
+        return 5
     // if (team.MaxGroupSize == undefined || isNaN(team.MaxGroupSize)) return 5
 
     return -1
@@ -150,7 +155,7 @@ function isValidCoach(coach) {
         coach.CoachPhoneNumber.trim() == ''
     )
         return 3
-    if (coach.CoachId == undefined || coach.CoachId.trim() == '') return 4
+    if (coach.CoachId == undefined || isNaN(coach.CoachId)) return 4
 
     return -1
 }
@@ -512,7 +517,7 @@ app.post('/api/groups', urlencodedParser, function (req, res) {
 
     // assemble group information so we can validate it
     let group = {
-        GroupId: getNextId('group'), // assign id to group
+        GroupId: getNextId('group'),
         GroupName: req.body.GroupName,
         Organizations: [],
         SponsorName: req.body.SponsorName,
@@ -1071,7 +1076,7 @@ app.post(
         //     )
         //     return
         // }
-        decrementCounter('group')
+        //decrementCounter('group')
 
         fs.writeFileSync(__dirname + '/data/groups.json', JSON.stringify(data))
 
@@ -1124,6 +1129,10 @@ app.post(
         //     )
         //     return
         // }
+        if (Number(match.MaxGroupSize) === match.Organizations.length) {
+            res.status(409).send('Team is already full. Cannot add new Teams')
+            return
+        }
         match.Organizations.push(organization)
 
         fs.writeFileSync(__dirname + '/data/groups.json', JSON.stringify(data))

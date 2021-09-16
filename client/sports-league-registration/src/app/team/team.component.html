@@ -2,12 +2,15 @@
   <h1>{{ currentTeam.OrganizationName }}</h1>
   <div class="wrapper">
     <div class="teamData">
+      <label>Team ID: {{ currentTeam.OrganizationId }}</label>
       <label>Coach's Name: {{ currentTeam.CoachName }}</label>
+      <label>Coach's Phone: {{ currentTeam.CoachPhoneNumber }}</label>
       <label>Number of players: {{ currentTeam.Members.length }}/{{ 7 }}</label>
     </div>
     <div class="btnContainer">
+      <app-view-btn [routerLink]="currentTeam.OrganizationId"></app-view-btn>
       <app-edit-btn (click)="showTeamEditForm(currentTeam)"></app-edit-btn>
-      <app-delete-btn></app-delete-btn>
+      <app-delete-btn (click)="deleteTeam(currentTeam)"></app-delete-btn>
     </div>
   </div>
 </section>

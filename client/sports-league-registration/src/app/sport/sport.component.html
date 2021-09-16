@@ -12,6 +12,7 @@
       >
     </div>
     <div class="btnContainer">
+      <app-view-btn [routerLink]="sportInput.GroupId"></app-view-btn>
       <app-edit-btn (click)="showEditSportForm(this.sportInput)"></app-edit-btn>
       <app-delete-btn (click)="deleteSport(this.sportInput)"></app-delete-btn>
     </div>

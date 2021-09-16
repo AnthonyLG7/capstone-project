@@ -6,4 +6,23 @@
   padding-right: 50px;
   padding-top: 25px;
   padding-bottom: 25px;
+  width: 30%;
+}
+.picContainer {
+  display: flex;
+  border: 1px solid #000;
+  border-radius: 1em;
+  background-color: #224870;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 35%;
+  align-items: center;
+  justify-content: center;
+}
+.startWrapper {
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }

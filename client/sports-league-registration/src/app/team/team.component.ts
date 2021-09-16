@@ -28,6 +28,13 @@ export class TeamComponent implements OnInit {
     this.router.navigateByUrl(`${this.router.url}/${team.OrganizationId}/editTeam`)
 
   }
+  deleteTeam(team: Team) {
+    let result = confirm('You are about to delete a Team! Are you sure?');
+    if(result) {
+      this.teamService.deleteTeamInTeams(team);
+      window.location.reload();
+    }
+  }
 
 
 }

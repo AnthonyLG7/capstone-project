@@ -65,11 +65,15 @@ export class PlayersComponent implements OnInit {
     this.url = this.urlService.getUrl(this.router.url);
   }
 
+  
+
   showPlayersEditForm(player) {
     this.router.navigateByUrl(`${this.router.url}/editPlayer/${player.MemberId}`);
   }
 
   deletePlayer(player: Player) {
+    let result = confirm('You are about to delete a Player! Are you sure?');
+    if(result){
     if(this.router.url === '/players'){
       this.playersService.deletePlayerInPlayers(player).subscribe((player) => this.playersService.getPlayers());
     } else {
@@ -84,6 +88,8 @@ export class PlayersComponent implements OnInit {
         this.playersService.deletePlayerInTeam(this.currentSportId,this.currentTeamId, player).subscribe((player) => this.playersService.getPlayers());
       }
     }
+    window.location.reload();
   }
+}
 
 }

@@ -26,9 +26,12 @@ body {
 .mcontainer {
   display: flex;
   margin-top: 185px;
+  flex-wrap: wrap;
 }
 div.mainContainer {
-  height: 1000px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .regButton {

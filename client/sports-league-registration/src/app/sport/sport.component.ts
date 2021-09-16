@@ -26,7 +26,11 @@ export class SportComponent implements OnInit {
   }
 
   deleteSport(sport: Sport) {
-    this.sportsService.deleteSport(sport).subscribe((sport) => this.sportsService.getSports());
+    let result = confirm('You are about to delete a Player! Are you sure?');
+    if(result) {
+      this.sportsService.deleteSport(sport).subscribe((sport) => this.sportsService.getSports());
+      window.location.reload()
+    }
   }
 
 }

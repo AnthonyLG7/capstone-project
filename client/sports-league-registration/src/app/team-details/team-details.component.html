@@ -11,7 +11,7 @@
     <div class="btnContainer">
       <app-view-btn (click)="viewPlayers(sport)"></app-view-btn>
       <app-edit-btn (click)="showTeamSportEditForm(sport)"></app-edit-btn>
-      <app-delete-btn></app-delete-btn>
+      <app-delete-btn (click)="deleteSportFromTeam()"></app-delete-btn>
     </div>
   </div>
 </section>

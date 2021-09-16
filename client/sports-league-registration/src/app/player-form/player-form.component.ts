@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlayersService } from '../services/players.service';
 
 @Component({
@@ -20,17 +20,19 @@ export class PlayerFormComponent implements OnInit {
   formStatus: string;
 
 
-  constructor(private playerService: PlayersService, private formBuilder: FormBuilder, private _router: ActivatedRoute, private location: Location) { }
+  constructor(private playerService: PlayersService, private formBuilder: FormBuilder, private _router: ActivatedRoute, private location: Location, private router: Router) { }
 
   ngOnInit(): void {
     this._router.url.subscribe((url) => {
       console.log(url);
       if(url.length === 2) {
+        console.log("url length 2")
         this.workflow = url[0].path;
         this.formStatus = url[1].path;
         console.log(url[1].path);
       }
       else if(url.length === 3) {
+        console.log("url len 3")
         this.workflow = url[0]?.path;
         this.formStatus = url[1]?.path;
         this.currentPlayerId = Number(url[2]?.path);
@@ -40,6 +42,7 @@ export class PlayerFormComponent implements OnInit {
           this.currentSportId = Number(url[3]?.path);
           this.currentTeamId = url[1]?.path;
           this.formStatus = url[4]?.path;
+          this.currentPlayerId = Number(url[5]?.path);
         } else {
           this.currentSportId = Number(url[1]?.path);
           this.currentTeamId = url[3]?.path;
@@ -55,9 +58,13 @@ export class PlayerFormComponent implements OnInit {
           this.playerForm.patchValue(this.currentPlayer);
       })
       }
+    } else if (this.workflow === 'players'){
+      console.log("I am in players main")
+      console.log(this.currentPlayerId);
+      this.playerService.getPlayerInPlayer(this.currentPlayerId).subscribe((playerObject) => {this.currentPlayer = playerObject; this.playerForm.patchValue(this.currentPlayer);});
     } else {
       if(!Number.isNaN(this.currentPlayerId) && this.currentPlayerId !== undefined){
-        this.playerService.getPlayerInPlayer(this.currentPlayerId).subscribe((playerObject) => {
+        this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId).subscribe((playerObject) => {
           this.currentPlayer = playerObject;
           this.playerForm.patchValue(this.currentPlayer);
         })
@@ -82,7 +89,15 @@ export class PlayerFormComponent implements OnInit {
     console.log('formStatus' + this.formStatus)
     console.log(this.workflow);
     if (this.formStatus === 'editPlayer') {
-      this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayers())
+      if(this.workflow === 'players') {
+        this.playerService.updatePlayerInPlayer(formValues).subscribe((player) => this.playerService.getPlayerInPlayer(this.currentPlayerId))
+        
+      } else if(this.workflow === 'teams') {
+        this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayers())
+        //this.router.navigateByUrl(`teams/${this.currentTeamId}/viewPlayers/${this.currentSportId}`);
+      } else {
+        this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId))
+      }
     } else if (this.formStatus === 'addPlayer') {
       if(this.workflow === 'players') {
         this.playerService.addPlayer(formValues).subscribe((player) => this.playerService.getPlayers());
@@ -93,6 +108,9 @@ export class PlayerFormComponent implements OnInit {
       }
     }
     //console.log(formValues);
+    // console.log(this.router.navigateByUrl());
+    //this.router.navigateByUrl('players');
     this.location.back();
+    
   }
 }

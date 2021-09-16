@@ -33,5 +33,10 @@ export class TeamDetailsComponent implements OnInit {
     console.log('I am pressed');
     this.router.navigateByUrl(`${this.router.url}/editSport/${sport.GroupId}`)
   }
+  deleteSportFromTeam() {
+    let result = confirm(`You are about to remove this sport from Team: ${this.teamName}! Are you sure?`)
+    // TODO 
+
+  }
 
 }

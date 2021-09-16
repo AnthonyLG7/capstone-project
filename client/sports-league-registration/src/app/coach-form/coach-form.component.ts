@@ -16,6 +16,7 @@ export class CoachFormComponent implements OnInit {
   coach: Coach;
   coachForm: FormGroup;
   formStatus: string;
+  
 
   constructor(private coachService: CoachesService, private router: ActivatedRoute, private formBuilder: FormBuilder, private location: Location) { }
 
@@ -47,14 +48,16 @@ export class CoachFormComponent implements OnInit {
   onSubmit(coach: Coach) {
     if(this.formStatus === 'editCoaches') {
       this.coachService.updateCoach(coach).subscribe((coach) => 
-        this.coachService.getCoaches());
+      this.coachService.getCoachByTeam(this.coachId));
     } else if (this.formStatus === 'addCoaches') {
-      this.coachService.addCoach(coach).subscribe((coach) => this.coachService.getCoaches());
+      this.coachService.addCoach(coach).subscribe((coach) => this.coachService.getCoachByTeam(this.coachId));
     }
+    // window.location.reload();
     this.location.back();
   }
 
   cancelCoachForm() {
+    
     this.location.back();
   }
 

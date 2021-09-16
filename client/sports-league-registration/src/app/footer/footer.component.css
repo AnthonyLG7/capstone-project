@@ -5,3 +5,7 @@ footer {
   text-align: left;
   position: fixed;
 }
+
+p {
+  margin-left: 15px;
+}
