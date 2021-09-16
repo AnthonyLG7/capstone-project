@@ -25,6 +25,10 @@ export class PlayersService {
     const result: Observable<Player> = this.http.post<Player>(this.playersUrl,player,this.jsonContentTypeHeaders);
     return result;
   }
+  addPlayerToTeam(sportId: number, teamId: string, player: Player): Observable<Player> {
+    const result: Observable<Player> = this.http.post<Player>(`${this.playersInSportUrl}/${sportId}/organizations/${teamId}/members`, player, this.jsonContentTypeHeaders);
+    return result;
+  }
 
   getPlayers(): Observable<Player[]> {
     const results: Observable<Player[]> = this.http.get<Player[]>(this.playersUrl);

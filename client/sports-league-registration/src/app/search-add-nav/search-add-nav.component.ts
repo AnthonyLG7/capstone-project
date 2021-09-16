@@ -28,12 +28,21 @@ console.log(this.router.url);
       } else if (this.url.length === 3) {
         console.log("I am getting bigger size 3");
         this.router.navigateByUrl(`${this.router.url}/addTeam`);
+      } else if (this.url.length === 5) {
+        console.log("I am the biggest size 5");
+        this.router.navigateByUrl(`${this.router.url}/addPlayer`);
       }
 
     } else if (this.workflow === 'teams'){
       console.log("I am adding a team")
       if(this.url.length === 2){
         this.router.navigateByUrl(`${this.router.url}/addTeam`);
+      } else if(this.url.length === 3) {
+        console.log("I am getting bigger size 3 add sport to team");
+        this.router.navigateByUrl(`${this.router.url}/addSport`);
+      } else if(this.url.length === 5) {
+        console.log("I am the biggest size 5 adding player to team");
+        this.router.navigateByUrl(`${this.router.url}/addPlayer`);
       }
     } else if (this.workflow === 'coaches') {
       console.log("I am adding a coach")
