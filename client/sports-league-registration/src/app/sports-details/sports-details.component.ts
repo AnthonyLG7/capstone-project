@@ -4,6 +4,7 @@ import { until } from 'protractor';
 import { Sport } from '../models/sport';
 import { Team } from '../models/team';
 import { SportsService } from '../services/sports.service';
+import { TeamsService } from '../services/teams.service';
 
 @Component({
   selector: 'app-sports-details',
@@ -14,7 +15,7 @@ export class SportsDetailsComponent implements OnInit {
   currentSport;
   sportId: number;
 
-  constructor(private sportsService: SportsService, private router: Router, private activatedRoute: ActivatedRoute) { 
+  constructor(private sportsService: SportsService, private router: Router, private activatedRoute: ActivatedRoute, private teamService: TeamsService) { 
   }
 
   ngOnInit(): void {
@@ -35,6 +36,12 @@ export class SportsDetailsComponent implements OnInit {
   showPlayers(currentTeam: Team) {
     console.log('I am pressed');
     this.router.navigateByUrl(`${this.router.url}/viewPlayers/${currentTeam.OrganizationId}`)
+  }
+  deleteSport(sport: Sport) {
+    this.sportsService.deleteSport(sport).subscribe((sport) => this.sportsService.getSports());
+  }
+  deleteTeamInSport(team: Team, sport: Sport) {
+    this.teamService.deleteTeamInSport(sport.GroupId,team).subscribe((team) => this.sportsService.getSports());
   }
 
 }

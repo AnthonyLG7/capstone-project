@@ -63,4 +63,13 @@ export class TeamsService {
     const result: Observable<Team> = this.http.put<Team>(`${this.teamsUrl}/${team.OrganizationId}`, team, this.jsonContentTypeHeaders);
     return result;
   }
+
+  deleteTeamInSport(sportId: number ,team: Team): Observable<Team> {
+    const result: Observable<Team> = this.http.delete<Team>(`${this.teamsUpdateUrl}/${sportId}/organizations/${team.OrganizationId}`);
+    return result;
+  }
+  deleteTeamInTeams(team: Team): Observable<Team> {
+    const result: Observable<Team> = this.http.delete<Team>(`${this.teamsUrl}/${team.OrganizationId}`);
+    return result;
+  }
 }

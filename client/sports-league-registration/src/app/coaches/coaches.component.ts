@@ -30,4 +30,7 @@ export class CoachesComponent implements OnInit, OnDestroy {
   ngOnDestroy():void {
     this.subscription.unsubscribe();
   }
+  deleteCoach(coach: Coach) {
+    this.coachesService.deleteCoach(coach).subscribe((coach) => this.coachesService.getCoaches());
+  }
 }

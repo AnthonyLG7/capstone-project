@@ -25,4 +25,8 @@ export class SportComponent implements OnInit {
     this.router.navigateByUrl(`${this.router.url}/${sport.GroupId}/editSport`);
   }
 
+  deleteSport(sport: Sport) {
+    this.sportsService.deleteSport(sport).subscribe((sport) => this.sportsService.getSports());
+  }
+
 }

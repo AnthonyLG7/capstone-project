@@ -11,7 +11,7 @@
     </div>
     <div class="btnContainer">
       <app-edit-btn (click)="showEditSportForm(this.sportInput)"></app-edit-btn>
-      <app-delete-btn></app-delete-btn>
+      <app-delete-btn (click)="deleteSport(this.sportInput)"></app-delete-btn>
     </div>
   </div>
 </section>

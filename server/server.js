@@ -74,6 +74,38 @@ function getNextId(counterType) {
             data.nextCoach++
             break
     }
+}
+function decrementCounter(counterType) {
+    // use 'group' or 'member' or 'user' as counterType
+    // read the counter file
+    let data = fs.readFileSync(__dirname + '/data/counters.json', 'utf8')
+    data = JSON.parse(data)
+
+    // find the next id from the counters file and then increment the
+    // counter in the file to indicate that id was used
+    let id = -1
+    switch (counterType.toLowerCase()) {
+        case 'group':
+            id = data.nextGroup
+            data.nextGroup--
+            break
+        case 'member':
+            id = data.nextMember
+            data.nextMember--
+            break
+        case 'user':
+            id = data.nextUser
+            data.nextUser--
+            break
+        case 'organization':
+            id = data.nextOrganization
+            data.nextOrganization--
+            break
+        case 'coach':
+            id = data.nextCoach
+            data.nextCoach--
+            break
+    }
 
     // save the updated counter
     fs.writeFileSync(__dirname + '/data/counters.json', JSON.stringify(data))
@@ -1039,6 +1071,7 @@ app.post(
         //     )
         //     return
         // }
+        decrementCounter('group')
 
         fs.writeFileSync(__dirname + '/data/groups.json', JSON.stringify(data))
 
@@ -1311,6 +1344,115 @@ app.delete(
         res.status(200).send()
     }
 )
+
+// Delete player in players
+app.delete('/api/members/:memberid', urlencodedParser, function (req, res) {
+    let memberId = req.params.memberid
+
+    console.log(
+        'Received a DELETE request for a player in members.json ' + memberId
+    )
+
+    let data = fs.readFileSync(__dirname + '/data/members.json', 'utf8')
+    data = JSON.parse(data)
+
+    let matchingGroup = data.find((element) => element.MemberId == memberId)
+    if (matchingGroup == null) {
+        res.status(404).send('Player Not Found')
+        return
+    }
+
+    // find the org
+    let foundAt = data.findIndex((m) => m.MemberId == memberId)
+    console.log(foundAt)
+
+    // delete the member if found
+    if (foundAt != -1) {
+        data.splice(foundAt, 1)
+    }
+
+    fs.writeFileSync(__dirname + '/data/members.json', JSON.stringify(data))
+    decrementCounter('member')
+
+    console.log('Delete request processed')
+    // Note:  even if we didn't find them, send a 200 back because they are gone
+    res.status(200).send()
+})
+
+// Delete coach in coach
+app.delete('/api/coaches/:coachId', urlencodedParser, function (req, res) {
+    let coachId = req.params.coachId
+
+    console.log(
+        'Received a DELETE request for a coach in coaches.json with ID: ' +
+            coachId
+    )
+
+    let data = fs.readFileSync(__dirname + '/data/coaches.json', 'utf8')
+    data = JSON.parse(data)
+
+    let matchingGroup = data.find((element) => element.CoachId == coachId)
+    if (matchingGroup == null) {
+        res.status(404).send('Group Not Found')
+        return
+    }
+
+    // find the org
+    let foundAt = data.findIndex((c) => c.CoachId == coachId)
+    console.log(foundAt)
+
+    // delete the member if found
+    if (foundAt != -1) {
+        data.splice(foundAt, 1)
+    }
+
+    fs.writeFileSync(__dirname + '/data/coaches.json', JSON.stringify(data))
+    decrementCounter('coach')
+
+    console.log('Delete request processed')
+    // Note:  even if we didn't find them, send a 200 back because they are gone
+    res.status(200).send()
+})
+
+// Delete team in team
+app.delete('/api/organizations/:orgId', urlencodedParser, function (req, res) {
+    let organizationId = req.params.orgId
+
+    console.log(
+        'Received a DELETE request for a team in organizations.json with ID: ' +
+            orgId
+    )
+
+    let data = fs.readFileSync(__dirname + '/data/organizations.json', 'utf8')
+    data = JSON.parse(data)
+
+    let matchingGroup = data.find(
+        (element) => element.OrganizationId == organizationId
+    )
+    if (matchingGroup == null) {
+        res.status(404).send('Group Not Found')
+        return
+    }
+
+    // find the org
+    let foundAt = data.findIndex((c) => c.OrganizationId == organizationId)
+    console.log(foundAt)
+
+    // delete the member if found
+    if (foundAt != -1) {
+        data.splice(foundAt, 1)
+    }
+
+    fs.writeFileSync(
+        __dirname + '/data/organizations.json',
+        JSON.stringify(data)
+    )
+    decrementCounter('organization')
+
+    console.log('Delete request processed')
+    // Note:  even if we didn't find them, send a 200 back because they are gone
+    res.status(200).send()
+})
 
 // ----------------------------------------------------------------------------
 // USER MANAGEMENT

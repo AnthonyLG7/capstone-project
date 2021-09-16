@@ -10,7 +10,7 @@
       </div>
       <div class="btnContainer">
         <app-edit-btn (click)="showPlayersEditForm(player)"></app-edit-btn>
-        <app-delete-btn></app-delete-btn>
+        <app-delete-btn (click)="deletePlayer(player)"></app-delete-btn>
       </div>
     </div>
   </section>

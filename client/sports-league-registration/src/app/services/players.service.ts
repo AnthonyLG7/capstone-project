@@ -57,5 +57,14 @@ export class PlayersService {
     const result : Observable<Player> = this.http.put<Player>(`${this.playerByPlayerUrl}/${player.MemberId}`,player,this.jsonContentTypeHeaders);
     return result;
   }
+  deletePlayerInPlayers(player: Player): Observable<Player> {
+    const result: Observable<Player> = this.http.delete<Player>(`${this.playersUrl}/${player.MemberId}`);
+    return result;
+  }
+
+  deletePlayerInTeam(sportId: number, teamId: string ,player: Player): Observable<Player> {
+    const result: Observable<Player> = this.http.delete<Player>(`${this.playersInSportUrl}/${sportId}/organizations/${teamId}/members/${player.MemberId}`);
+    return result;
+  }
 
 }

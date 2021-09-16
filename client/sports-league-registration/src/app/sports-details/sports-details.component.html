@@ -14,7 +14,7 @@
       </div>
       <div class="btnContainer">
         <app-edit-btn (click)="showSportEditForm(currentSport)"></app-edit-btn>
-        <app-delete-btn></app-delete-btn>
+        <app-delete-btn (click)="deleteSport(currentSport)"></app-delete-btn>
       </div>
     </div>
   </section>
@@ -36,7 +36,9 @@
       <div class="btnContainer">
         <app-view-btn (click)="showPlayers(team)"></app-view-btn>
         <app-edit-btn (click)="showTeamSportEditForm(team)"></app-edit-btn>
-        <app-delete-btn></app-delete-btn>
+        <app-delete-btn
+          (click)="deleteTeamInSport(team, currentSport)"
+        ></app-delete-btn>
       </div>
     </div>
   </section>

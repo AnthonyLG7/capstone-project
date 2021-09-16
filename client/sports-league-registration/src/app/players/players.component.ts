@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from '../models/player';
 import { PlayersService } from '../services/players.service';
+import { UrlService } from '../services/url.service';
 
 @Component({
   selector: 'app-players',
@@ -14,12 +15,17 @@ export class PlayersComponent implements OnInit {
   currentPath: string;
   sportId: number;
   teamId: string;
+  workflow: string;
+  url;
+  currentSportId: number;
+  currentTeamId: string;
 
 
-  constructor(private playersService: PlayersService, private _router: ActivatedRoute, private router: Router) { }
+  constructor(private playersService: PlayersService, private _router: ActivatedRoute, private router: Router, private urlService: UrlService) { }
 
   ngOnInit(): void {
     this._router.url.subscribe((url) => {
+      this.workflow = url[0].path;
       if(url.length > 1) {
        // this.currentPath = url[url.length - 2].path
        this.currentPath = url[0].path;
@@ -56,10 +62,28 @@ export class PlayersComponent implements OnInit {
         this.players = playersObject;
       });
     }
+    this.url = this.urlService.getUrl(this.router.url);
   }
 
   showPlayersEditForm(player) {
     this.router.navigateByUrl(`${this.router.url}/editPlayer/${player.MemberId}`);
+  }
+
+  deletePlayer(player: Player) {
+    if(this.router.url === '/players'){
+      this.playersService.deletePlayerInPlayers(player).subscribe((player) => this.playersService.getPlayers());
+    } else {
+      console.log(this.url);
+      if (this.workflow === 'teams') {
+        this.currentSportId = Number(this.url[4]);
+        this.currentTeamId = this.url[2];
+        this.playersService.deletePlayerInTeam(this.currentSportId,this.currentTeamId, player).subscribe((player) => this.playersService.getPlayers());
+      } else if(this.workflow === 'sports') {
+        this.currentSportId = Number(this.url[2]);
+        this.currentTeamId = this.url[4];
+        this.playersService.deletePlayerInTeam(this.currentSportId,this.currentTeamId, player).subscribe((player) => this.playersService.getPlayers());
+      }
+    }
   }
 
 }

@@ -43,4 +43,9 @@ export class SportsService {
     console.log("Update sport");
     return result;
   }
+
+  deleteSport(sport: Sport): Observable<Sport> {
+    const result: Observable<Sport> = this.http.delete<Sport>(`${this.sportsUrl}/${sport.GroupId}`);
+    return result;
+  }
 }

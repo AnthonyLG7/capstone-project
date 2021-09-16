@@ -36,4 +36,9 @@ export class CoachesService {
     const results: Observable<Coach> = this.http.put<Coach>(`${this.coachesUrl}/${coach.CoachId}`, coach, this.jsonContentTypeHeaders);
     return results;
   }
+
+  deleteCoach(coach:Coach): Observable<Coach> {
+    const result: Observable<Coach> = this.http.delete<Coach>(`${this.coachesUrl}/${coach.CoachId}`);
+    return result;
+  }
 }
