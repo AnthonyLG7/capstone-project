@@ -1,6 +1,6 @@
 <section
   class="sportsSection"
-  *ngFor="let sport of sports"
+  *ngFor="let sport of filteredSports"
   (click)="sportsDetailsRoute(sport)"
 >
   <app-sport [sportInput]="sport" [routerLink]="sport.GroupId"></app-sport>

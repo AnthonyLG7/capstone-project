@@ -29,6 +29,7 @@ import { PlayerFormComponent } from './player-form/player-form.component';
 import { CoachFormComponent } from './coach-form/coach-form.component';
 import { SearchAddNavComponent } from './search-add-nav/search-add-nav.component';
 import { AddBtnComponent } from './add-btn/add-btn.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AddBtnComponent } from './add-btn/add-btn.component';
     PlayerFormComponent,
     CoachFormComponent,
     SearchAddNavComponent,
-    AddBtnComponent
+    AddBtnComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sport } from '../models/sport';
 import { SportsService } from '../services/sports.service';
+import { UrlService } from '../services/url.service';
 
 @Component({
   selector: 'app-sport',
@@ -13,7 +14,6 @@ export class SportComponent implements OnInit {
   //Added Input for demonstration purposes to show I can use input.
   @Input() sportInput;
   sports: Sport[];
-  
 
   constructor(private sportsService: SportsService, private router: Router) { }
 
