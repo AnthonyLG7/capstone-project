@@ -24,21 +24,19 @@ export class UrlService {
   }
 
   filter(searchedObject: any[], searchedValue, category) {
-    // return value.filter((v) => v.name.indexOf(searchedObject) > -1 || v.size.indexOf(searchedObject) > -1)
     let data = JSON.stringify(searchedObject);
+    console.log(data);
     let objectData = [];
-    // return searchedObject.filter((arrObject) => {
-    //     console.log(arrObject);
-        
-    //     //console.log(data);
-    // })
     console.log(`value: ${searchedValue}`);
     if(category === 'sport') {
       objectData = JSON.parse(data).filter((o) => 
 
         o.GroupId === Number(searchedValue) || o.GroupName.includes(searchedValue) || o.SponsorName.includes(searchedValue) || o.SponsorEmail.includes(searchedValue)|| o.SponsorPhone.includes(searchedValue)
       ) 
-
+    } else if (category === 'sportDetails') {
+      objectData = JSON.parse(data).filter((o) => 
+        o.OrganizationId.includes(searchedValue) || o.OrganizationName.includes(searchedValue || o.CoachName.includes(searchedValue) || o.CoachPhoneNumber.includes(searchedValue))
+      )
     }
     console.log(objectData);
     return objectData;

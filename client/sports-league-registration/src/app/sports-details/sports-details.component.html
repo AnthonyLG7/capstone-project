@@ -21,7 +21,7 @@
   <section class="teamDetails">
     <div
       [ngClass]="first ? 'firstWrapper' : 'wrapper'"
-      *ngFor="let team of currentSport?.Organizations; let first = first"
+      *ngFor="let team of filteredTeams; let first = first"
     >
       <div class="labelContainer">
         <h1 class="labelHeading">Teams: {{ team?.OrganizationName }}</h1>

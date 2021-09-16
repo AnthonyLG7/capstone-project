@@ -2,12 +2,14 @@
   <h1>Sport: {{ this.sportInput.GroupName }}</h1>
   <div class="wrapper">
     <div class="sportData">
-      <label>Sport Director's Name: {{ this.sportInput.SponsorName }}</label>
-      <label>
-        Number of teams: {{ this.sportInput.Organizations.length }}/{{
-          this.sportInput.MaxGroupSize
-        }}
-      </label>
+      <label>Sport ID: {{ sportInput?.GroupId }}</label>
+      <label>Sport Director's Name: {{ sportInput?.SponsorName }}</label>
+      <label>Sport Director's Email: {{ sportInput?.SponsorEmail }}</label>
+      <label>Sport Director's Phone: {{ sportInput?.SponsorPhone }}</label>
+      <label
+        >Team Capacity: {{ sportInput?.Organizations?.length }}/
+        {{ sportInput?.MaxGroupSize }}</label
+      >
     </div>
     <div class="btnContainer">
       <app-edit-btn (click)="showEditSportForm(this.sportInput)"></app-edit-btn>
