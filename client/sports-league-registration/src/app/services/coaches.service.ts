@@ -16,6 +16,11 @@ export class CoachesService {
 
   constructor(private http: HttpClient) { }
 
+  addCoach(coach: Coach): Observable<Coach> {
+    const result: Observable<Coach> = this.http.post<Coach>(this.coachesUrl, coach, this.jsonContentTypeHeaders);
+    return result;
+  }
+
   getCoaches(): Observable<Coach[]> {
     const results: Observable<Coach[]> = this.http.get<Coach[]>(this.coachesUrl);
     console.log(results);
