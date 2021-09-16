@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: 'sports', component: SportsComponent },
       { path: 'sports/addSport', component: SportFormComponent },
       { path: 'sports/:id', component: SportsDetailsComponent },
+      { path: 'sports/:id/addTeam', component: TeamFormComponent },
       { path: 'sports/:id/:sportFormStatus', component: SportFormComponent },
       { path: 'sports/:id/viewPlayers/:teamId', component: PlayersComponent },
       { path: 'sports/:id/viewPlayers/:teamId/:playerFormStatus/:playerId', component: PlayerFormComponent },

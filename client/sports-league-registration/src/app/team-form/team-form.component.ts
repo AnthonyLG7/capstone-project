@@ -28,8 +28,14 @@ export class TeamFormComponent implements OnInit {
         this.formStatus = url[1].path
       }
        else if(url.length === 3) {
-          this.currentTeamId = url[1]?.path;
-          this.formStatus = url[2]?.path;
+          if(url[2]?.path === 'editTeam') {
+            this.currentTeamId = url[1]?.path;
+            this.formStatus = url[2]?.path;
+          } else if (url[2]?.path === 'addTeam') {
+            console.log("formStatus should be addTeam")
+            this.currentSportId = Number(url[1]?.path);
+            this.formStatus = url[2]?.path  ;
+          }
       } else {
         this.currentSportId = Number(url[1]?.path);
         this.formStatus = url[2]?.path;
@@ -73,7 +79,12 @@ export class TeamFormComponent implements OnInit {
       }
     } else if ( this.formStatus === 'addTeam') {
       console.log("adding new team");
-      this.teamService.addTeam(formValues).subscribe((team) => this.teamService.getTeams())
+      if(Number.isNaN(this.currentSportId)) {
+        console.log('Adding team from teams main page');
+        this.teamService.addTeam(formValues).subscribe((team) => this.teamService.getTeams())
+      } else {
+        this.teamService.addTeamToSport(this.currentSportId, formValues).subscribe((team) => this.teamService.getTeams())
+      }
     }
     console.log(formValues);
     console.log('pressed form');

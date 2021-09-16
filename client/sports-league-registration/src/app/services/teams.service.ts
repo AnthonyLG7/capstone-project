@@ -29,6 +29,11 @@ export class TeamsService {
     return result;
   }
 
+  addTeamToSport(sportId: number, team:Team): Observable<Team> {
+    const result: Observable<Team> = this.http.post<Team>(`${this.teamsUpdateUrl}/${sportId}/organizations`,team,this.jsonContentTypeHeaders);
+    return result;
+  }
+
   getTeams(): Observable<Team[]> {
     const results: Observable<Team[]> = this.http.get<Team[]>(this.teamsUrl);
     console.log(results);

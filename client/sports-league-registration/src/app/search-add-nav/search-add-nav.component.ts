@@ -25,6 +25,9 @@ console.log(this.router.url);
       console.log("I am adding a sport");
       if(this.url.length === 2){
         this.router.navigateByUrl(`${this.router.url}/addSport`);
+      } else if (this.url.length === 3) {
+        console.log("I am getting bigger size 3");
+        this.router.navigateByUrl(`${this.router.url}/addTeam`);
       }
 
     } else if (this.workflow === 'teams'){
