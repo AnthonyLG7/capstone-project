@@ -29,12 +29,12 @@ export class CoachFormComponent implements OnInit {
         this.formStatus = url[1].path;
         this.coachId = Number(url[2].path);
       }
-    })
+    }, (err) => alert(err));
     if(this.coachId !== undefined) {
       this.coachService.getCoachByTeam(this.coachId).subscribe((coachObject) => {
         this.coach = coachObject;
         this.coachForm.patchValue(this.coach);
-      })
+      }, (err) => alert(err))
     }
     this.coachForm = this.formBuilder.group({
       'CoachId': [this.coach?.CoachId, [Validators.required]],
@@ -48,9 +48,9 @@ export class CoachFormComponent implements OnInit {
   onSubmit(coach: Coach) {
     if(this.formStatus === 'editCoaches') {
       this.coachService.updateCoach(coach).subscribe((coach) => 
-      this.coachService.getCoachByTeam(this.coachId));
+      this.coachService.getCoachByTeam(this.coachId), (err) => alert(err));
     } else if (this.formStatus === 'addCoaches') {
-      this.coachService.addCoach(coach).subscribe((coach) => this.coachService.getCoachByTeam(this.coachId));
+      this.coachService.addCoach(coach).subscribe((coach) => this.coachService.getCoachByTeam(this.coachId), (err) => alert(err));
     }
     // window.location.reload();
     this.location.back();

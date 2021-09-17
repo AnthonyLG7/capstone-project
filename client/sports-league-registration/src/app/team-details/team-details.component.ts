@@ -15,13 +15,13 @@ export class TeamDetailsComponent implements OnInit {
   sportList;
   teamName: string
   constructor(private teamService: TeamsService, private route: ActivatedRoute, private router: Router) { 
-    route.params.subscribe((value) => this.teamId = value.id);
+    route.params.subscribe((value) => this.teamId = value.id, (err) => alert(err));
     console.log(this.teamId);
   }
 
   ngOnInit(): void {
-    this.teamService.getSportsById(this.teamId).subscribe((sports) => this.sportList = sports);
-    this.teamService.getTeamById(this.teamId).subscribe((team) => this.teamName = team.OrganizationName)
+    this.teamService.getSportsById(this.teamId).subscribe((sports) => this.sportList = sports, (err) => alert(err));
+    this.teamService.getTeamById(this.teamId).subscribe((team) => this.teamName = team.OrganizationName, (err) => alert(err))
     console.log(this.sportList?.Organizations)
   }
 

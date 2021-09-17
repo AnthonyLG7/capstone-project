@@ -24,7 +24,7 @@ export class SportsComponent implements OnInit {
     this.sportsService.getSports().subscribe((sportsObjects) =>{
       this.sports = sportsObjects;
       console.log(this.sports);
-    });
+    }, (err) => alert(err));
   }
 
   ngAfterContentChecked(): void {

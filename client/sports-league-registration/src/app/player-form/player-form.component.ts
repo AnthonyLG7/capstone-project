@@ -50,24 +50,24 @@ export class PlayerFormComponent implements OnInit {
           this.formStatus = url[4]?.path;
         }
       }
-    })
+    }, (err) => alert(err))
     if(this.workflow === 'sports') {
       if(!Number.isNaN(this.currentPlayerId) && this.currentPlayerId !== undefined) {
         this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId).subscribe((playerObject) => {
           this.currentPlayer = playerObject;
           this.playerForm.patchValue(this.currentPlayer);
-      })
+      }, (err) => alert(err))
       }
     } else if (this.workflow === 'players'){
       console.log("I am in players main")
       console.log(this.currentPlayerId);
-      this.playerService.getPlayerInPlayer(this.currentPlayerId).subscribe((playerObject) => {this.currentPlayer = playerObject; this.playerForm.patchValue(this.currentPlayer);});
+      this.playerService.getPlayerInPlayer(this.currentPlayerId).subscribe((playerObject) => {this.currentPlayer = playerObject; this.playerForm.patchValue(this.currentPlayer);}, (err) => alert(err));
     } else {
       if(!Number.isNaN(this.currentPlayerId) && this.currentPlayerId !== undefined){
         this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId).subscribe((playerObject) => {
           this.currentPlayer = playerObject;
           this.playerForm.patchValue(this.currentPlayer);
-        })
+        }, (err) => alert(err))
       }
     }
     this.playerForm = this.formBuilder.group({
@@ -90,21 +90,21 @@ export class PlayerFormComponent implements OnInit {
     console.log(this.workflow);
     if (this.formStatus === 'editPlayer') {
       if(this.workflow === 'players') {
-        this.playerService.updatePlayerInPlayer(formValues).subscribe((player) => this.playerService.getPlayerInPlayer(this.currentPlayerId))
+        this.playerService.updatePlayerInPlayer(formValues).subscribe((player) => this.playerService.getPlayerInPlayer(this.currentPlayerId), (err) => alert(err))
         
       } else if(this.workflow === 'teams') {
-        this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayers())
+        this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayers(), (err) => alert(err))
         //this.router.navigateByUrl(`teams/${this.currentTeamId}/viewPlayers/${this.currentSportId}`);
       } else {
-        this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId))
+        this.playerService.updatePlayerInTeam(this.currentSportId, this.currentTeamId,formValues).subscribe((player) => this.playerService.getPlayerById(this.currentSportId,this.currentTeamId, this.currentPlayerId), (err) => alert(err))
       }
     } else if (this.formStatus === 'addPlayer') {
       if(this.workflow === 'players') {
-        this.playerService.addPlayer(formValues).subscribe((player) => this.playerService.getPlayers());
+        this.playerService.addPlayer(formValues).subscribe((player) => this.playerService.getPlayers(), (err) => alert(err));
       } else {
         console.log('going in here');
         console.log(`currentSportId: ${this.currentSportId} and currentTeamID: ${this.currentTeamId}`);
-        this.playerService.addPlayerToTeam(this.currentSportId, this.currentTeamId, formValues).subscribe((player) => this.playerService.getPlayers());
+        this.playerService.addPlayerToTeam(this.currentSportId, this.currentTeamId, formValues).subscribe((player) => this.playerService.getPlayers(), (err) => alert(err));
       }
     }
     //console.log(formValues);

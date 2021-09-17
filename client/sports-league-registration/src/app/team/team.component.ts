@@ -20,8 +20,8 @@ export class TeamComponent implements OnInit {
   constructor(private teamService: TeamsService, private sportsService: SportsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.teamService.getTeams().subscribe((currentTeam) => this.teams = currentTeam);
-    this.sportsService.getSports().subscribe((sportsObject) => this.sports = sportsObject);
+    this.teamService.getTeams().subscribe((currentTeam) => this.teams = currentTeam, (err) => alert(err));
+    this.sportsService.getSports().subscribe((sportsObject) => this.sports = sportsObject, (err) => alert(err));
   }
 
   showTeamEditForm(team: Team) {

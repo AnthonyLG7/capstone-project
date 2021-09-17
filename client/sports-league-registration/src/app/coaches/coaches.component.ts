@@ -20,7 +20,7 @@ export class CoachesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.coachesService.getCoaches().subscribe((coachesObject) => {
       this.coaches = coachesObject;
-    });
+    }, (err) => alert(err));
   }
 
   showCoachEditForm(coach: Coach) {
@@ -33,7 +33,7 @@ export class CoachesComponent implements OnInit, OnDestroy {
   deleteCoach(coach: Coach) {
     let result = confirm("You are about to delete a coach! Are you sure?");
     if(result) {
-      this.coachesService.deleteCoach(coach).subscribe((coach) => this.coachesService.getCoaches())
+      this.coachesService.deleteCoach(coach).subscribe((coach) => this.coachesService.getCoaches(), (err) => alert(err))
       window.location.reload();
     }
     

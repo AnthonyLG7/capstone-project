@@ -47,14 +47,14 @@ export class TeamFormComponent implements OnInit {
       console.log(this.currentTeamId);
       console.log(this.formStatus);
       console.log(this.currentSportId);
-    });
+    }, (err) => alert(err));
     if(this.currentTeamId !== undefined) {
       this.teamService.getTeamById(this.currentTeamId).subscribe((teamObject) => {
         console.log(this.currentTeamId);
         this.currentTeam = teamObject;
         console.log(this.currentTeam);
         this.teamForm.patchValue(this.currentTeam);
-      });
+      }, (err) => alert(err));
     }
     this.teamForm = this.formBuilder.group({
       'OrganizationId': [this.currentTeam?.OrganizationId, [Validators.required]],
@@ -73,17 +73,17 @@ export class TeamFormComponent implements OnInit {
     console.log('formStatus: ' + this.formStatus);
     if(this.formStatus === 'editTeam') {
       if(this.currentSportId === NaN) {
-          this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams())
+          this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams(), (err) => alert(err))
       } else {
-        this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams() )
+        this.teamService.updateTeamInTeams(formValues).subscribe((team) => this.teamService.getTeams(), (err) => alert(err) )
       }
     } else if ( this.formStatus === 'addTeam') {
       console.log("adding new team");
       if(Number.isNaN(this.currentSportId)) {
         console.log('Adding team from teams main page');
-        this.teamService.addTeam(formValues).subscribe((team) => this.teamService.getTeams())
+        this.teamService.addTeam(formValues).subscribe((team) => this.teamService.getTeams(), (err) => alert(err))
       } else {
-        this.teamService.addTeamToSport(this.currentSportId, formValues).subscribe((team) => this.teamService.getTeams())
+        this.teamService.addTeamToSport(this.currentSportId, formValues).subscribe((team) => this.teamService.getTeams(), (err) => alert(err))
       }
     }
     console.log(formValues);

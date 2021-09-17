@@ -24,8 +24,8 @@ export class SportsDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((value) => this.sportId = value.id);
-    this.sportsService.getSportById(this.sportId).subscribe((sport) => this.currentSport = sport);
+    this.activatedRoute.params.subscribe((value) => this.sportId = value.id , (err) => alert(err));
+    this.sportsService.getSportById(this.sportId).subscribe((sport) => this.currentSport = sport , (err) => alert(err));
     console.log(this.currentSport);
   }
 
@@ -59,10 +59,10 @@ export class SportsDetailsComponent implements OnInit {
     this.router.navigateByUrl(`${this.router.url}/viewPlayers/${currentTeam.OrganizationId}`)
   }
   deleteSport(sport: Sport) {
-    this.sportsService.deleteSport(sport).subscribe((sport) => this.sportsService.getSports());
+    this.sportsService.deleteSport(sport).subscribe((sport) => this.sportsService.getSports(), (err) => alert(err));
   }
   deleteTeamInSport(team: Team, sport: Sport) {
-    this.teamService.deleteTeamInSport(sport.GroupId,team).subscribe((team) => this.sportsService.getSports());
+    this.teamService.deleteTeamInSport(sport.GroupId,team).subscribe((team) => this.sportsService.getSports(), (err) => alert(err));
   }
 
 }

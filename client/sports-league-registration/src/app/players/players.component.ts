@@ -35,32 +35,32 @@ export class PlayersComponent implements OnInit {
         this.currentPath = url[0].path
       }
 
-    });
+    }, (err) => alert(err));
     console.log("testing " + this.currentPath);
     if(this.currentPath === 'players') {
       this.playersService.getPlayers().subscribe((playersObject) => {
         this.players = playersObject;
-      })
+      }, (err) => alert(err))
     } else if (this.currentPath === 'sports') {
       this._router.params.subscribe((value) => {
         this.sportId = value.id;
         this.teamId = value.teamId;
         console.log(this.sportId);
         console.log(this.teamId);
-      })
+      }, (err) => alert(err))
       this.playersService.getAllPlayersInSport(this.sportId, this.teamId).subscribe((playersObject) => {
         this.players = playersObject;
-      });
+      }, (err) => alert(err));
     } else {
       this._router.params.subscribe((value) => {
         this.sportId = value.sportId;
         this.teamId = value.teamId;
         console.log(this.sportId);
         console.log(this.teamId);
-      })
+      }, (err) => alert(err))
       this.playersService.getAllPlayersInSport(this.sportId, this.teamId).subscribe((playersObject) => {
         this.players = playersObject;
-      });
+      }, (err) => alert(err));
     }
     this.url = this.urlService.getUrl(this.router.url);
   }
@@ -75,17 +75,17 @@ export class PlayersComponent implements OnInit {
     let result = confirm('You are about to delete a Player! Are you sure?');
     if(result){
     if(this.router.url === '/players'){
-      this.playersService.deletePlayerInPlayers(player).subscribe((player) => this.playersService.getPlayers());
+      this.playersService.deletePlayerInPlayers(player).subscribe((player) => this.playersService.getPlayers(), (err) => alert(err));
     } else {
       console.log(this.url);
       if (this.workflow === 'teams') {
         this.currentSportId = Number(this.url[4]);
         this.currentTeamId = this.url[2];
-        this.playersService.deletePlayerInTeam(this.currentSportId,this.currentTeamId, player).subscribe((player) => this.playersService.getPlayers());
+        this.playersService.deletePlayerInTeam(this.currentSportId,this.currentTeamId, player).subscribe((player) => this.playersService.getPlayers(), (err) => alert(err));
       } else if(this.workflow === 'sports') {
         this.currentSportId = Number(this.url[2]);
         this.currentTeamId = this.url[4];
-        this.playersService.deletePlayerInTeam(this.currentSportId,this.currentTeamId, player).subscribe((player) => this.playersService.getPlayers());
+        this.playersService.deletePlayerInTeam(this.currentSportId,this.currentTeamId, player).subscribe((player) => this.playersService.getPlayers(), (err) => alert(err));
       }
     }
     window.location.reload();
